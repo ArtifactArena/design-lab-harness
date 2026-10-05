@@ -1,0 +1,18 @@
+<mujoco>
+  <option timestep="0.00025"/>
+  <worldbody>
+    <geom name="sumo_ring" type="cylinder" size="7.5 1" condim="3" friction="0.8 9 9"/>
+    <body name="red_root" pos="-2 0 1.2">
+      <freejoint/>
+      <geom name="red_chassis" type="box" size="0.2 0.2 0.2" mass="50" condim="1" friction="0.6 8 8" priority="1"/>
+      <body name="red_rotor"><joint name="red_hinge"/><geom type="sphere" size="0.05" mass="1"/></body>
+    </body>
+    <body name="blue_root" pos="2 0 1.2">
+      <freejoint/>
+      <geom name="blue_chassis" type="box" size="0.2 0.2 0.2" mass="50" condim="4" friction="0.4 7 7" priority="2"/>
+      <body name="blue_rotor"><joint name="blue_hinge"/><geom type="sphere" size="0.05" mass="1"/></body>
+    </body>
+  </worldbody>
+  <contact><pair geom1="red_chassis" geom2="blue_chassis" condim="3" friction="9 9 9 9 9"/></contact>
+  <actuator><motor name="red_motor" joint="red_hinge"/><motor name="blue_motor" joint="blue_hinge"/></actuator>
+</mujoco>

@@ -1,0 +1,10 @@
+# Kimi K2.7 Code (Moonshot) via Together AI (key: TOGETHER_API_KEY) — HIGH reasoning.
+# reasoning_effort passed via extra_body (Together rejects it as a top-level param).
+# Verified end-to-end: extra_body.reasoning_effort=high returns reasoning_content.
+model: together_ai/moonshotai/Kimi-K2.7-Code
+temperature: 1.0
+top_p: 0.95
+max_tokens: 131072   # raised from 32K: 32K caused ~70% parse-error rate in OEH (reasoning ate the budget, no room for tool-call JSON)
+num_retries: 10
+extra_body:
+  reasoning_effort: high

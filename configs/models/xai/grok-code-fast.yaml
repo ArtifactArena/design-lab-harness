@@ -1,0 +1,3 @@
+model: xai/grok-code-fast-1
+temperature: 1.0
+max_tokens: 32000

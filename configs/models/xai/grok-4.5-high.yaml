@@ -1,0 +1,17 @@
+# Grok 4.5 (high reasoning effort) — OEH design-lab-harness runs for grok-4.5-high.
+# grok-4.5's reasoning is native/always-on; the xAI API accepts reasoning_effort
+# without error (depth largely self-budgeted). We set it high to honor the request.
+# max_tokens raised well above grok-4.20's 32K: in the OEH agent loop reasoning
+# tokens share the completion budget with the tool-call JSON, and 32K caused ~70%
+# parse-error rates for other reasoners (see kimi-k2.7-code-high note). 131072 gives
+# ample room for reasoning + a clean tool call.
+model: xai/grok-4.5
+temperature: 1.0
+max_tokens: 131072
+# reasoning_effort via extra_body (NOT top-level): litellm rejects a top-level
+# reasoning_effort for xai (no reasoning support in its static param map) and the
+# harness allowlist covers only Anthropic/OpenAI/Gemini. extra_body is forwarded
+# verbatim to the xAI body, which accepts reasoning_effort (verified live). Same
+# pattern the Together kimi/minimax -high configs use.
+extra_body:
+  reasoning_effort: high

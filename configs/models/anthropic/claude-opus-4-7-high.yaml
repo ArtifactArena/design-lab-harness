@@ -1,0 +1,14 @@
+model: anthropic/claude-opus-4-7
+temperature: 1.0
+max_tokens: 128000  # Anthropic native max_output_tokens
+# Native Anthropic effort (provider-managed budget). reasoning_effort:high would
+# instead map to litellm's fixed 4096-token thinking budget — far weaker — because
+# litellm only routes reasoning_effort→output_config for models matching "opus-4-5".
+# Opus 4.7/4.8 run WITHOUT extended thinking unless `thinking` is sent (unlike Fable 5,
+# Opus 5 and Sonnet 5, which think by default). Adaptive is the only on-mode on 4.7/4.8;
+# budget_tokens is rejected. Added 2026-09-17 — before that every run of this config was
+# thinking-off.
+thinking:
+  type: adaptive
+output_config:
+  effort: high

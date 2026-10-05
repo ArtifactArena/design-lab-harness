@@ -1,0 +1,33 @@
+{
+  "name": "Earth Hexahedron",
+  "generator": "hexahedron",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary hexahedron baseline embodying earth element. No actuators. 6-faced geometric form (cube).",
+    "overview": "A sturdy hexahedron (cube) symbolizing earth with 6 square faces. Serves as a platonic solid baseline with elemental inspiration.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "Cubic structure offers broad, stable base with large contact surface area across all 6 faces for excellent defensive properties."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a platonic solid baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary earth hexahedron (cube) — platonic solid baseline",
+    "element": "Earth",
+    "faces": 6
+  }
+}

@@ -1,0 +1,23 @@
+<mujoco model="baseline_octahedron">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="octahedron"
+          vertex="0.30 0.00 0.00
+                 -0.30 0.00 0.00
+                  0.00 0.30 0.00
+                  0.00 -0.30 0.00
+                  0.00 0.00 0.30
+                  0.00 0.00 -0.30"
+          scale="1 1 1"/>
+    <material name="steel" rgba="0.95 0.85 0.15 1" specular="0.6" shininess="0.5"/>
+  </asset>
+  <worldbody>
+    <body name="bot" pos="0 0 0.35">
+      <freejoint name="root"/>
+      <geom name="octa_geom" type="mesh" mesh="octahedron"
+            material="steel" mass="200"
+            friction="0.6 0.005 0.0001"/>
+    </body>
+  </worldbody>
+  <actuator/>
+</mujoco>

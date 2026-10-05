@@ -1,0 +1,69 @@
+# =============================================================================
+# Arena Rules — complete game rules for 3D Battle Bots
+# =============================================================================
+# This is the single source of truth for all constraints, match rules, and
+# physics parameters. Materials are in materials_store.yaml (auto-loaded).
+# The MJCF syntax reference the models read is a section of the consolidated prompts.
+
+# Arena configuration (circular ring)
+arena:
+  shape: circle
+  radius_m: 7.5  # diameter 15m
+  thickness_z_m: 2.0
+
+# Robot constraints
+robot:
+  # Mass constraints
+  mass:
+    min_total_kg: 25.0
+    max_total_kg: 800.0
+
+  # Control constraints
+  control:
+    motor_mass_per_gear: 0.01
+    max_dof_damping: 600.0     # internal joint/tendon linear damping 0–600, no mass cost
+    max_frictionloss: 600.0    # per internal joint DOF or tendon, no mass cost
+    # Root-joint damping, frictionloss, stiffness and all armature are fixed at 0 by the environment.
+    gear_clamp_ratio: 0    # max gear = body_inertia_min × ratio; prevents QACC instability
+
+  # Structure limits
+  structure:
+    max_bodies: 2000
+    max_geoms: 2000
+    max_actuators: 2000
+    min_actuators: 1
+
+  # Maximum axis-aligned bounding box of the XML initial pose, world axes, before spawn
+  # rotation; the same box is re-checked in the root-body frame on every control step.
+  size:
+    max_x_span_m: 2.44
+    max_y_span_m: 2.44
+    max_z_span_m: 3.05
+
+# Inactivity rule (runtime values live in configs/tournaments/base.yaml under
+# tournament.match: inactivity_timeout / inactivity_min_displacement, and apply to
+# qualification and tournament alike). Starting 10 s into a round, checked every
+# control step: a robot loses if its two furthest center-of-mass positions (XYZ) in
+# the preceding 10 s are less than 0.5 m apart. If both trigger on the same step, the
+# robot whose COM is more than 1 cm higher wins; otherwise the round is a tie.
+
+# Validation checks - ALL checks actually run by the validator
+validation:
+  checks:
+    - "XML compiles in MuJoCo"
+    - "Total mass (geometry_mass + sum(|gear|) × motor_mass_per_gear) under limit"
+    - "Actuator count within min-max range"
+    - "Only <motor> actuator tags allowed (other actuator types are rejected)"
+    - "Root body has freejoint (6 DOF for 3D)"
+    - "Exactly one free joint per robot, on the root body (no detachable parts)"
+    - "Every geom has a valid material= from the palette"
+    - "Every <motor> has a name= (unnamed actuators are rejected)"
+    - "Every geom has a name= (unnamed geoms are rejected)"
+    - "Geom type= is one of box, cylinder, sphere, capsule, ellipsoid, sdf (type=\"mesh\" is rejected)"
+    - "No mass=, density=, body mass=, or <inertial> on geoms"
+    - "Size constraints (AABB spans within limits)"
+    - "Collision settings are environment-owned (condim 6, priority 2, fixed solref/solimp; author overrides ignored and reported)"
+    - "Gear per actuator <= body_inertia_min × gear_clamp_ratio (clamped if exceeded, 0 = disabled)"
+    - "Internal joint/tendon damping and frictionloss finite and within 0–600; stiffness finite and >= 0; springs unloaded in the initial pose"
+    - "Inactivity (qualification and tournament): from 10 s, a robot loses when its two furthest COM positions in the trailing 10 s are < 0.5 m apart (XYZ)"
+    - "Runtime size limit (every control step, qualification and tournament): a robot whose root-frame extents exceed max_{x,y,z}_span_m loses on that step"

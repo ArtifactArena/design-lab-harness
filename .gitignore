@@ -1,0 +1,20 @@
+# Per-run agent workspaces and match outputs (regenerated each run)
+runs/*
+!runs/.gitkeep
+# Parallel-runner logs + manifests (regenerated each batch)
+parallel_logs/
+logs/
+out/
+arena_kit/out/
+**/__pycache__/
+.pytest_cache/
+
+# secrets / local env
+.env
+# per-machine Claude Code permissions
+.claude/settings.local.json
+
+# macOS / MuJoCo cruft
+.DS_Store
+MUJOCO_LOG.TXT
+*.pyc

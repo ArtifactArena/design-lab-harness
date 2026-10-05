@@ -1,0 +1,3 @@
+model: xai/grok-3-mini
+temperature: 1.0
+max_tokens: 32000

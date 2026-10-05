@@ -1,0 +1,8 @@
+model: anthropic/claude-fable-5
+temperature: 1.0
+max_tokens: 128000  # Anthropic native max_output_tokens (Fable 5 cap)
+# Native Anthropic effort (provider-managed budget), identical shape to the
+# claude-opus-4-8-high config. Fable 5 has thinking always-on and takes no
+# `thinking` param; depth is controlled purely via output_config.effort.
+output_config:
+  effort: high

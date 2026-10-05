@@ -1,0 +1,58 @@
+# SH — Sampling harness (zero-shot) run: same 24-model roster as the ARH redo
+# (configs/models/run-roster-2026-09.yaml). Each iteration is one fresh single-commit
+# design with no design ledger and no verifier feedback (sampling_prompt.md).
+#
+#   python run_baseline_agent.py --config configs/tournaments/sh.yaml \
+#       --llms <one model yaml> --iterations 250 --build-only --output-dir <root>/<model>
+#
+# `season.iterations` below is the per-model sample count from
+# docs/plans/2026-09-03-sampling-250-pool.md; override with --iterations for smoke runs.
+
+base: base.yaml
+
+llms:
+  - configs/models/anthropic/claude-fable-5-1-high.yaml
+  - configs/models/anthropic/claude-fable-5-high.yaml
+  - configs/models/anthropic/claude-opus-5-high.yaml
+  - configs/models/anthropic/claude-sonnet-5-high.yaml
+  - configs/models/anthropic/claude-opus-4-7-high.yaml
+  - configs/models/anthropic/claude-opus-4-8-high.yaml
+  - configs/models/openai/gpt-6-astra.yaml
+  - configs/models/openai/gpt-5.6-luna.yaml
+  - configs/models/openai/gpt-5.6-sol.yaml
+  - configs/models/openai/gpt-5.6-terra.yaml
+  - configs/models/openai/gpt-5.5.yaml
+  - configs/models/openai/gpt-5.4.yaml
+  - configs/models/openai/gpt-5.3-codex-high.yaml
+  - configs/models/google/gemini-3-1-pro-high.yaml
+  - configs/models/google/gemini-3-8-flash-high.yaml
+  - configs/models/xai/grok-4.6-high.yaml
+  - configs/models/xai/grok-4.5-high.yaml
+  - configs/models/xai/grok-4.20-reasoning.yaml
+  - configs/models/deepseek/deepseek-v4-pro-thinking.yaml
+  - configs/models/kimi/kimi-k3-high.yaml
+  - configs/models/minimax/minimax-m3-high.yaml
+  - configs/models/qwen/qwen3.8-2.4t-a95b-thinking.yaml
+  - configs/models/zai/glm-5.3-high.yaml
+  - configs/models/zai/glm-5.2-high.yaml
+
+season:
+  env: PROD
+  season_id: sh
+  tournament_id: sh
+  iterations: 250
+  output_dir: LOGS-SAMPLING/{date}/{tournament_id}
+
+models_as_engineers:
+  unified_generation: true
+  zero_shot_mode: true
+  commit_budget: 1
+  # The run's one design brief: rules, MJCF syntax and obs schema in one document.
+  zero_shot_prompt_path: configs/rules/sampling_prompt.md
+  use_dspy_cache: false
+  n_parallel_builds: 1
+
+output:
+  verbose: true
+  debug_all: true
+  dump_prompt: true          # keep every request + response: refinement/commit_0/prompt.txt

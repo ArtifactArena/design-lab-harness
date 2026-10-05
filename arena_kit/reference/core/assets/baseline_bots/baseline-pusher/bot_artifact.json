@@ -1,0 +1,31 @@
+{
+  "name": "Evader&Pusher Baseline Bot",
+  "generator": "pusher",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": ["motor_fl", "motor_fr", "motor_rl", "motor_rr"],
+  "morphology_outputs": {
+    "design_calculations": "Carbon fiber chassis (60kg) + steel front plate (25kg) + 4 rubber wheels (15kg each) = 145kg total.",
+    "overview": "Low-profile 4-wheel differential-drive pusher with steel ramming plate and rubber wheels for traction.",
+    "movement": "Four hinge-joint wheels with gear=2500. Left pair (motor_fl+motor_rl) and right pair (motor_fr+motor_rr) for differential steering.",
+    "attack": "Steel front plate acts as a battering ram. Edge-scaled push power near arena boundary.",
+    "defense": "Asymmetric edge safety: push through when opponent is between us and edge, retreat when heading toward edge alone."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Pure reactive controller. Speed-limited approach, full push on contact, asymmetric edge safety.",
+    "movement_logic": "Differential drive: left_pair = throttle - turn, right_pair = throttle + turn. Heading error drives steering. Max approach speed 1.5 m/s.",
+    "attack_logic": "On contact, push with power scaled by edge distance (1.0 far, 0.4 at edge). Keeps pushing when opponent is between us and edge.",
+    "defense_logic": "Asymmetric edge safety: full retreat when near edge without opponent ahead. Emergency brake at 1.8m edge distance. Only 1.0m brake when actively pushing opponent toward edge."
+  },
+  "morphology_score": 1.0,
+  "controller_score": 1.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Active pusher baseline for ELO calibration — reactive 4-wheel drive, ~76% WR vs stationary block"
+  }
+}

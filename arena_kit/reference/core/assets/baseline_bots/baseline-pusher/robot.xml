@@ -1,0 +1,62 @@
+<mujoco model="baseline_car">
+  <asset>
+    <texture name="wheel_tread_tex" type="2d" builtin="checker"
+             rgb1="0.05 0.05 0.05" rgb2="0.35 0.35 0.35"
+             width="256" height="256" mark="cross" markrgb="0.8 0.2 0.2"/>
+    <material name="rubber" texture="wheel_tread_tex" texrepeat="6 1" texuniform="true"
+              rgba="0.12 0.12 0.12 1" specular="0.1" shininess="0.1"/>
+    <material name="steel" rgba="0.55 0.55 0.60 1" specular="0.6" shininess="0.5"/>
+    <material name="tungsten" rgba="0.35 0.35 0.38 1" specular="0.4" shininess="0.3"/>
+  </asset>
+  <worldbody>
+    <body name="bot" pos="0 0 0.20">
+      <freejoint name="root"/>
+      <geom name="chassis" type="box" size="0.35 0.25 0.05"
+            material="steel" mass="273.0" friction="0.6 0.005 0.0001" priority="2"/>
+      <geom name="front_bumper" type="box" size="0.08 0.25 0.03" pos="0.38 0 -0.02"
+            material="steel" mass="37.4" friction="0.6 0.005 0.0001" priority="2"/>
+
+      <body name="ballast_left" pos="0 0.13 0.0">
+        <geom name="ballast_left_g" type="box" size="0.1685 0.1029 0.0655"
+              material="tungsten" mass="175.3" friction="0.4 0.005 0.0001"
+              contype="0" conaffinity="0" priority="2"/>
+      </body>
+
+      <body name="ballast_right" pos="0 -0.13 0.0">
+        <geom name="ballast_right_g" type="box" size="0.1685 0.1029 0.0655"
+              material="tungsten" mass="175.3" friction="0.4 0.005 0.0001"
+              contype="0" conaffinity="0" priority="2"/>
+      </body>
+
+      <body name="wheel_fl" pos="0.25 0.30 -0.04">
+        <joint name="j_wheel_fl" type="hinge" axis="0 1 0"/>
+        <geom name="wheel_fl_g" type="cylinder" size="0.16 0.05" euler="1.5708 0 0"
+              material="rubber" mass="9.7" friction="1.6 0.005 0.0001" priority="2"/>
+      </body>
+
+      <body name="wheel_fr" pos="0.25 -0.30 -0.04">
+        <joint name="j_wheel_fr" type="hinge" axis="0 1 0"/>
+        <geom name="wheel_fr_g" type="cylinder" size="0.16 0.05" euler="1.5708 0 0"
+              material="rubber" mass="9.7" friction="1.6 0.005 0.0001" priority="2"/>
+      </body>
+
+      <body name="wheel_rl" pos="-0.25 0.30 -0.04">
+        <joint name="j_wheel_rl" type="hinge" axis="0 1 0"/>
+        <geom name="wheel_rl_g" type="cylinder" size="0.16 0.05" euler="1.5708 0 0"
+              material="rubber" mass="9.7" friction="1.6 0.005 0.0001" priority="2"/>
+      </body>
+
+      <body name="wheel_rr" pos="-0.25 -0.30 -0.04">
+        <joint name="j_wheel_rr" type="hinge" axis="0 1 0"/>
+        <geom name="wheel_rr_g" type="cylinder" size="0.16 0.05" euler="1.5708 0 0"
+              material="rubber" mass="9.7" friction="1.6 0.005 0.0001" priority="2"/>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="motor_fl" joint="j_wheel_fl" gear="2500"/>
+    <motor name="motor_fr" joint="j_wheel_fr" gear="2500"/>
+    <motor name="motor_rl" joint="j_wheel_rl" gear="2500"/>
+    <motor name="motor_rr" joint="j_wheel_rr" gear="2500"/>
+  </actuator>
+</mujoco>

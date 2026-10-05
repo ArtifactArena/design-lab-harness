@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="unimal_sumo_env_2d_sf_clean">
+  <compiler angle="radian"/>
+  <option gravity="0 0 -9.81"/>
+
+  <!-- =============== ASSETS =============== -->
+  <asset>
+    <!-- 2D-style sky: procedural gradient (no photo) -->
+    <texture name="sky_2d" type="skybox"
+             builtin="gradient" width="1024"
+             rgb1="0.08 0.08 0.12"
+             rgb2="0.18 0.18 0.28"
+             mark="none"/>
+
+    <!-- Stage wood (kept, but flattened via material) -->
+    <texture  name="wood_tex" type="2d" file="assets/textures/wood/WoodFloor043.png"/>
+    <material name="stage_floor" texture="wood_tex" texrepeat="10 1" texuniform="true"
+              emission="0.05" specular="0" shininess="0" reflectance="0"/>
+
+    <!-- Lava floor material (glowing orange/red) -->
+    <texture name="lava_tex" type="2d" builtin="checker" width="64" height="64"
+             rgb1="0.9 0.2 0.05" rgb2="0.7 0.1 0.02"/>
+    <material name="lava_mat" texture="lava_tex" texrepeat="8 2" emission="0.8"
+              specular="0" shininess="0" reflectance="0.1"/>
+
+    <!-- Side walls material (dark, non-reflective) -->
+    <material name="wall_mat" rgba="0.15 0.15 0.2 1.0" emission="0.02"
+              specular="0" shininess="0" reflectance="0"/>
+
+    <!-- Banner (self-lit) -->
+    <texture  name="banner_tex" type="2d" file="assets/textures/fight_banner.png"/>
+    <material name="banner_neon" texture="banner_tex" emission="1.35" specular="0" shininess="0"/>
+  </asset>
+
+  <!-- =============== VISUALS =============== -->
+  <visual>
+    <!-- Perspective free camera defaults (viewer free cam behaves like 3D arena) -->
+    <global fovy="2.4"/>
+    <!-- Flat lighting: no specular via headlight, slight ambient only -->
+    <headlight ambient="0.45 0.45 0.45" diffuse="0 0 0" specular="0 0 0"/>
+    <!-- No fog/haze; shallow clip range to avoid depth artifacts -->
+    <map fogstart="100" fogend="101" znear="0.01" zfar="50" haze="0"/>
+    <!-- Kill shadows & MSAA for a crisp sprite-like look -->
+    <quality shadowsize="0" offsamples="0"/>
+  </visual>
+
+  <!-- =============== WORLD =============== -->
+  <worldbody>
+
+    <!-- Minimal fill lights (very soft, no directionality) -->
+    <light name="fillL"  pos="-6 3 6" dir="0 -0.2 -1" diffuse="0.15 0.15 0.15" specular="0 0 0" directional="true"/>
+    <light name="fillR"  pos=" 6 3 6" dir="0 -0.2 -1" diffuse="0.15 0.15 0.15" specular="0 0 0" directional="true"/>
+
+    <body name="arena" pos="0 0 0">
+
+      <!-- STAGE (platform) -->
+      <geom name="sumo_ring" type="box" pos="0 0 0.12" size="3.40 0.20 0.20"
+            material="stage_floor" friction="1.00 0.005 0.0001" condim="3" priority="1"/>
+
+      <!-- LAVA FLOOR (below platform) - touching this ends the game -->
+      <geom name="outside_floor" type="box" pos="0 0 -2.0" size="6.0 0.30 0.05"
+            material="lava_mat" friction="0.5 0.01 0.001" condim="3" priority="1"/>
+
+      <!-- SIDE WALLS (bouncy, don't end game) -->
+      <!-- Left wall -->
+      <geom name="wall_left" type="box" pos="-5.5 0 -0.5" size="0.15 0.30 2.0"
+            material="wall_mat" friction="0.8 0.01 0.001" condim="3" priority="1"/>
+      <!-- Right wall -->
+      <geom name="wall_right" type="box" pos="5.5 0 -0.5" size="0.15 0.30 2.0"
+            material="wall_mat" friction="0.8 0.01 0.001" condim="3" priority="1"/>
+
+      <!-- Spawn markers -->
+      <site name="spawn/left" pos="-1.5 0 0.2" size="0.001" rgba="0 0 0 0" type="sphere"/>
+      <site name="spawn/right" pos=" 1.5 0 0.2" size="0.001" rgba="0 0 0 0" type="sphere"/>
+      <!-- Cameras: side-on (zoomed out), perspective for consistent viewer behavior -->
+      <camera name="side"
+              pos="0 -14.0 0.0" xyaxes="1 0 0  0 0 1"
+              mode="trackcom" fovy="45.0"/>
+      <camera name="topdown"
+              pos="0  0.0 12.00" quat="1 0 0 0"
+              mode="trackcom" fovy="55.0"/>
+
+    </body>
+  </worldbody>
+</mujoco>

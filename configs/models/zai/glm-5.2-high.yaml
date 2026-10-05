@@ -1,0 +1,11 @@
+# GLM 5.2 (Zhipu / z.ai) via Together AI (key: TOGETHER_API_KEY) — HIGH reasoning.
+# Together rejects top-level reasoning_effort, so it is passed via extra_body
+# (raw passthrough); GLM's chat template reads `reasoning_effort`. Verified
+# end-to-end: extra_body.reasoning_effort=high emits a real reasoning trace.
+model: together_ai/zai-org/GLM-5.2
+temperature: 1.0
+top_p: 0.95
+max_tokens: 131072
+num_retries: 10
+extra_body:
+  reasoning_effort: high

@@ -1,0 +1,75 @@
+<mujoco>
+  <worldbody>
+    <body name="quadwedge_center_shepherd" pos="0 0 0.18" description="Root body, 4WD wedge with outriggers">
+      <freejoint name="root" description="6-DOF free joint for arena movement"/>
+
+      <!-- Main chassis -->
+      <geom description="Main chassis" name="chassis_geom" type="box" size="0.55 0.45 0.05" material="carbon_fiber"/>
+
+      <!-- Low ballast (child body keeps root light) -->
+      <body description="Low ballast (child body keeps root light)" name="ballast_body" pos="0 0 -0.10">
+        <geom name="ballast_geom" type="box" size="0.28 0.22 0.035" material="steel" description="Steel ballast block for low center of gravity"/>
+      </body>
+
+      <!-- Front wedge / spatula (low to win ground contact) -->
+      <body description="Front wedge / spatula (low to win ground contact)" name="spatula_body" pos="0.62 0 -0.16">
+        <geom name="spatula_geom" type="box" size="0.35 0.45 0.008" material="steel" description="Ultra-thin steel spatula for ground contact"/>
+      </body>
+
+      <!-- Front bumper (lighter than steel to save mass) -->
+      <body description="Front bumper (lighter than steel to save mass)" name="bumper_body" pos="0.65 0 -0.10">
+        <geom name="bumper_geom" type="box" size="0.17 0.34 0.035" material="aluminum" description="Lightweight aluminum front bumper"/>
+      </body>
+
+      <!-- 4WD: wheels (cylinders oriented along Y for Y-axis hinge) -->
+      <body description="4WD: wheels (cylinders oriented along Y for Y-axis hinge)" name="wheel_FL_body" pos="0.22 0.55 0.04">
+        <joint name="axle_FL" type="hinge" axis="0 1 0" description="Front-left wheel axle, Y-axis rotation"/>
+        <geom name="wheel_FL_rubber" type="cylinder" size="0.22 0.07" euler="1.5708 0 0" material="rubber" description="Front-left rubber drive tire"/>
+        <geom name="wheel_FL_hub" type="cylinder" size="0.09 0.035" euler="1.5708 0 0" material="steel" description="Front-left steel hub for inertia"/>
+      </body>
+
+      <body name="wheel_FR_body" pos="0.22 -0.55 0.04" description="Front-right drive wheel with hub">
+        <joint name="axle_FR" type="hinge" axis="0 1 0" description="Front-right wheel axle, Y-axis rotation"/>
+        <geom name="wheel_FR_rubber" type="cylinder" size="0.22 0.07" euler="1.5708 0 0" material="rubber" description="Front-right rubber drive tire"/>
+        <geom name="wheel_FR_hub" type="cylinder" size="0.09 0.035" euler="1.5708 0 0" material="steel" description="Front-right steel hub for inertia"/>
+      </body>
+
+      <body name="wheel_RL_body" pos="-0.22 0.55 0.04" description="Rear-left drive wheel with hub">
+        <joint name="axle_RL" type="hinge" axis="0 1 0" description="Rear-left wheel axle, Y-axis rotation"/>
+        <geom name="wheel_RL_rubber" type="cylinder" size="0.22 0.07" euler="1.5708 0 0" material="rubber" description="Rear-left rubber drive tire"/>
+        <geom name="wheel_RL_hub" type="cylinder" size="0.09 0.035" euler="1.5708 0 0" material="steel" description="Rear-left steel hub for inertia"/>
+      </body>
+
+      <body name="wheel_RR_body" pos="-0.22 -0.55 0.04" description="Rear-right drive wheel with hub">
+        <joint name="axle_RR" type="hinge" axis="0 1 0" description="Rear-right wheel axle, Y-axis rotation"/>
+        <geom name="wheel_RR_rubber" type="cylinder" size="0.22 0.07" euler="1.5708 0 0" material="rubber" description="Rear-right rubber drive tire"/>
+        <geom name="wheel_RR_hub" type="cylinder" size="0.09 0.035" euler="1.5708 0 0" material="steel" description="Rear-right steel hub for inertia"/>
+      </body>
+
+      <!-- Rear stabilizer skids -->
+      <body description="Rear stabilizer skids" name="skid_back_left" pos="-0.62 0.34 -0.07">
+        <geom name="skid_BL_geom" type="sphere" size="0.07" material="plastic" description="Rear-left stabilizer skid ball"/>
+      </body>
+
+      <body name="skid_back_right" pos="-0.62 -0.34 -0.07" description="Rear-right stabilizer skid">
+        <geom name="skid_BR_geom" type="sphere" size="0.07" material="plastic" description="Rear-right stabilizer skid ball"/>
+      </body>
+
+      <!-- Side outriggers to reduce roll-induced ring-outs -->
+      <body description="Side outriggers to reduce roll-induced ring-outs" name="outrigger_left" pos="0.05 0.88 -0.06">
+        <geom name="outrigger_L_geom" type="sphere" size="0.06" material="plastic" description="Left side outrigger to prevent rollover"/>
+      </body>
+
+      <body name="outrigger_right" pos="0.05 -0.88 -0.06" description="Right side anti-roll outrigger">
+        <geom name="outrigger_R_geom" type="sphere" size="0.06" material="plastic" description="Right side outrigger to prevent rollover"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="drive_FL" joint="axle_FL" gear="1500"/>
+    <motor name="drive_FR" joint="axle_FR" gear="1500"/>
+    <motor name="drive_RL" joint="axle_RL" gear="1500"/>
+    <motor name="drive_RR" joint="axle_RR" gear="1500"/>
+  </actuator>
+</mujoco>

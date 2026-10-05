@@ -1,0 +1,33 @@
+{
+  "name": "Fire Tetrahedron",
+  "generator": "tetrahedron",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary tetrahedron baseline embodying fire element. No actuators. 4-faced geometric form.",
+    "overview": "A dynamic tetrahedron symbolizing fire with 4 triangular faces. Serves as a platonic solid baseline with elemental inspiration.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "Geometric form distributes forces across 4 faces, providing stability through sharp angular edges."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a platonic solid baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary fire tetrahedron — platonic solid baseline",
+    "element": "Fire",
+    "faces": 4
+  }
+}

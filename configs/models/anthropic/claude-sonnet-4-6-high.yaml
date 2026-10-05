@@ -1,0 +1,8 @@
+model: anthropic/claude-sonnet-4-6
+temperature: 1.0
+max_tokens: 64000  # Anthropic native max_output_tokens
+# Native Anthropic effort (provider-managed budget). reasoning_effort:high would
+# instead map to litellm's fixed 4096-token thinking budget — far weaker — because
+# litellm only routes reasoning_effort→output_config for models matching "opus-4-5".
+output_config:
+  effort: high

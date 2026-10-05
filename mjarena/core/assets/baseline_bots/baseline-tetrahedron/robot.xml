@@ -1,0 +1,21 @@
+<mujoco model="baseline_tetrahedron">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="tetrahedron"
+          vertex="0.30 0.00 -0.12
+                 -0.15 0.26 -0.12
+                 -0.15 -0.26 -0.12
+                  0.00 0.00 0.30"
+          scale="1 1 1"/>
+    <material name="steel" rgba="0.85 0.15 0.10 1" specular="0.6" shininess="0.5"/>
+  </asset>
+  <worldbody>
+    <body name="bot" pos="0 0 0.20">
+      <freejoint name="root"/>
+      <geom name="tetra_geom" type="mesh" mesh="tetrahedron"
+            material="steel" mass="200"
+            friction="0.6 0.005 0.0001"/>
+    </body>
+  </worldbody>
+  <actuator/>
+</mujoco>

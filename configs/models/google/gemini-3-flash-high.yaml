@@ -1,0 +1,4 @@
+model: gemini/gemini-3-flash-preview
+temperature: 1.0
+max_tokens: 65535  # Gemini native max_output_tokens
+reasoning_effort: high

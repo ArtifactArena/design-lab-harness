@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Cinematic octagon arena — Sim2Reason-inspired soft rendering.
+  High ambient + diffuse headlight, no shadow casting, matte pastel materials,
+  lavender sky, soft checker floor. Use for landing page / demo videos.
+-->
+<mujoco model="sumo_3d_cinematic">
+  <compiler angle="radian"/>
+  <option gravity="0 0 -9.81"/>
+
+  <!-- =============== ASSETS =============== -->
+  <asset>
+
+    <!-- Soft lavender gradient sky (matches Sim2Reason aesthetic) -->
+    <texture name="cinematic_sky" type="skybox"
+             builtin="gradient" width="2048"
+             rgb1="0.78 0.75 0.88"
+             rgb2="0.65 0.62 0.78"
+             mark="none"/>
+
+    <!-- Solid cream/beige studio floor (no pattern) -->
+    <texture name="cinematic_floor_tex" type="2d" builtin="flat"
+             rgb1="0.92 0.90 0.86"
+             rgb2="0.92 0.90 0.86"
+             width="64" height="64"/>
+    <material name="cinematic_floor_mat"
+              texture="cinematic_floor_tex"
+              texrepeat="1 1"
+              texuniform="true"
+              specular="0.02"
+              shininess="0.05"
+              reflectance="0.0"
+              emission="0.01"/>
+
+    <!-- Octagonal meshes (shared with octagon_3d) -->
+    <mesh name="octagon_platform_mesh" file="octagon_platform.obj"/>
+    <mesh name="octagon_surface_mesh" file="octagon_surface.obj"/>
+
+    <!-- Platform body: warm matte charcoal (pastel-shifted) -->
+    <material name="cinematic_platform"
+              rgba="0.35 0.36 0.40 1.0"
+              specular="0.08"
+              shininess="0.1"
+              reflectance="0.02"
+              emission="0.04"/>
+
+    <!-- Top surface: soft matte gold (reduced specular, no harsh shine) -->
+    <material name="cinematic_top"
+              rgba="0.78 0.68 0.28 1.0"
+              specular="0.08"
+              shininess="0.12"
+              reflectance="0.03"
+              emission="0.02"/>
+
+    <!-- Boundary marking: subtle warm line -->
+    <material name="cinematic_boundary"
+              rgba="0.60 0.50 0.25 1.0"
+              specular="0.05"
+              shininess="0.05"
+              reflectance="0"/>
+
+    <!-- Start position markers (soft pastel red/blue) -->
+    <material name="red_marker"
+              rgba="0.82 0.35 0.35 0.7"
+              emission="0.02"/>
+    <material name="blue_marker"
+              rgba="0.35 0.45 0.82 0.7"
+              emission="0.02"/>
+  </asset>
+
+  <!-- =============== VISUALS =============== -->
+  <visual>
+    <global fovy="45" offwidth="1920" offheight="1080"/>
+    <!-- Sim2Reason-matched: ambient=0.5, diffuse=0.7 — headlight shadows visible but soft -->
+    <headlight ambient="0.50 0.50 0.50" diffuse="0.70 0.70 0.70" specular="0.05 0.05 0.05"/>
+    <map fogstart="100" fogend="101" znear="0.01" zfar="100" haze="0"/>
+    <quality shadowsize="8192" offsamples="8"/>
+  </visual>
+
+  <!-- =============== WORLD =============== -->
+  <worldbody>
+
+    <!-- Shadow-casting key light from above — creates soft visible shadows on the ring -->
+    <light name="key_shadow"
+           pos="3 -4 12"
+           dir="-0.15 0.2 -1"
+           diffuse="0.20 0.20 0.20"
+           specular="0.02 0.02 0.02"
+           directional="true"
+           castshadow="true"/>
+
+    <!-- Gentle non-shadow fill from top -->
+    <light name="fill_top"
+           pos="0 0 12"
+           dir="0 0 -1"
+           diffuse="0.12 0.12 0.12"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <light name="fill_left"
+           pos="-8 0 6"
+           dir="0.6 0 -0.8"
+           diffuse="0.10 0.10 0.10"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <light name="fill_right"
+           pos="8 0 6"
+           dir="-0.6 0 -0.8"
+           diffuse="0.10 0.10 0.10"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <body name="arena" pos="0 0 0">
+
+      <!-- FLOOR: Soft cream checker -->
+      <geom name="outside_floor"
+            type="plane"
+            pos="0 0 0"
+            size="500 500 1"
+            material="cinematic_floor_mat"
+            friction="0.005 0.0001 0.0001"
+            solref="0.01 1.5"
+            solimp="0.9 0.95 0.01"
+            contype="1"
+            conaffinity="1"/>
+
+      <!-- PHYSICS RING: Invisible cylinder for collision + boundary detection -->
+      <geom name="sumo_ring"
+            type="cylinder"
+            size="7.5 1.0"
+            pos="0 0 1.0"
+            rgba="0 0 0 0"
+            friction="2.00 0.005 0.0001"
+            condim="3"
+            priority="1"
+            solref="0.005 1"
+            solimp="0.95 0.99 0.005"
+            margin="0.002"
+            contype="1"
+            conaffinity="1"
+            group="3"/>
+
+      <!-- VISUAL: Octagonal platform body (warm matte charcoal) -->
+      <geom name="dohyo_body_visual"
+            type="mesh"
+            mesh="octagon_platform_mesh"
+            pos="0 0 1.0"
+            material="cinematic_platform"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- VISUAL: Octagonal soft gold top surface -->
+      <geom name="dohyo_top_visual"
+            type="mesh"
+            mesh="octagon_surface_mesh"
+            pos="0 0 2.002"
+            material="cinematic_top"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Center mark -->
+      <site name="center_mark"
+            type="cylinder"
+            pos="0 0 2.003"
+            size="0.05 0.001"
+            rgba="0.50 0.45 0.35 0.2"/>
+
+      <!-- Camera target body -->
+      <body name="ring_center" pos="0 0 2.5">
+        <geom name="ring_center_marker" type="sphere" size="0.001"
+              rgba="0 0 0 0" group="3" contype="0" conaffinity="0"/>
+      </body>
+
+      <!-- RED spawn -->
+      <site name="spawn/left"
+            pos="-3.75 0 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="red_start_line"
+            type="box"
+            pos="-3.75 0 2.003"
+            size="0.25 0.01 0.0005"
+            material="red_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- BLUE spawn -->
+      <site name="spawn/right"
+            pos="3.75 0 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="blue_start_line"
+            type="box"
+            pos="3.75 0 2.003"
+            size="0.25 0.01 0.0005"
+            material="blue_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Y-axis spawns -->
+      <site name="spawn/front"
+            pos="0 -3.75 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <site name="spawn/back"
+            pos="0 3.75 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <!-- CAMERAS -->
+
+      <!-- 3/4 perspective -->
+      <camera name="side"
+              pos="9.0 -13.5 10.5"
+              mode="targetbody"
+              target="ring_center"
+              fovy="50"/>
+
+      <!-- Alternate angle -->
+      <camera name="front_quarter"
+              pos="12.0 7.5 9.0"
+              mode="targetbody"
+              target="ring_center"
+              fovy="48"/>
+
+      <!-- Dynamic tracking camera -->
+      <camera name="tracking"
+              pos="0 -12 10.5"
+              mode="trackcom"
+              fovy="55"/>
+
+      <!-- Top-down -->
+      <camera name="topdown"
+              pos="0 0 25"
+              quat="1 0 0 0"
+              mode="trackcom"
+              fovy="55"/>
+
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="sumo_3d_octagon">
+  <compiler angle="radian"/>
+  <option gravity="0 0 -9.81"/>
+
+  <!-- =============== ASSETS =============== -->
+  <asset>
+    <!-- Studio cyclorama: white to light gray gradient -->
+    <texture name="studio_sky" type="skybox"
+             builtin="gradient" width="2048"
+             rgb1="1.0 1.0 1.0"
+             rgb2="0.95 0.95 0.96"
+             mark="none"/>
+
+    <!-- Lava floor (glowing orange/red) -->
+    <texture name="studio_floor_tex" type="2d" builtin="checker"
+             width="64" height="64"
+             rgb1="0.9 0.2 0.05"
+             rgb2="0.7 0.1 0.02"/>
+    <material name="studio_floor_mat"
+              texture="studio_floor_tex"
+              texrepeat="4 4"
+              texuniform="true"
+              specular="0.0"
+              shininess="0.0"
+              reflectance="0.08"
+              emission="0.7"/>
+
+    <!-- Octagonal meshes -->
+    <mesh name="octagon_platform_mesh" file="octagon_platform.obj"/>
+    <mesh name="octagon_surface_mesh" file="octagon_surface.obj"/>
+
+    <!-- Platform body: neutral dark steel sides -->
+    <material name="dohyo_surface"
+              rgba="0.22 0.23 0.26 1.0"
+              specular="0.3"
+              shininess="0.4"
+              reflectance="0.05"
+              emission="0.06"/>
+
+    <!-- Top surface: premium gold -->
+    <material name="dohyo_top"
+              rgba="0.72 0.60 0.15 1.0"
+              specular="0.35"
+              shininess="0.5"
+              reflectance="0.12"
+              emission="0.0"/>
+
+    <!-- Dohyo boundary marking: muted burnt orange ring -->
+    <material name="dohyo_boundary"
+              rgba="0.65 0.32 0.08 1.0"
+              specular="0.1"
+              shininess="0.1"
+              reflectance="0"/>
+
+    <!-- Dohyo side bevel: dark steel -->
+    <material name="dohyo_bevel"
+              rgba="0.20 0.22 0.28 1.0"
+              specular="0.2"
+              shininess="0.3"
+              reflectance="0.02"/>
+
+    <!-- Start position markers -->
+    <material name="red_marker"
+              rgba="0.85 0.20 0.20 0.8"
+              emission="0"/>
+    <material name="blue_marker"
+              rgba="0.20 0.35 0.85 0.8"
+              emission="0"/>
+  </asset>
+
+  <!-- =============== VISUALS =============== -->
+  <visual>
+    <!-- Perspective camera with moderate FOV -->
+    <global fovy="45" offwidth="1920" offheight="1080"/>
+    <!-- Soft ambient + controlled headlight -->
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.15 0.15 0.15" specular="0.05 0.05 0.05"/>
+    <!-- Clean depth range -->
+    <map fogstart="100" fogend="101" znear="0.01" zfar="100" haze="0"/>
+    <!-- Enable shadows for grounding -->
+    <quality shadowsize="4096" offsamples="4"/>
+  </visual>
+
+  <!-- =============== WORLD =============== -->
+  <worldbody>
+
+    <!-- KEY LIGHT: Main directional from above-front -->
+    <light name="key_light"
+           pos="4 -6 8"
+           dir="-0.3 0.5 -1"
+           diffuse="0.35 0.35 0.35"
+           specular="0.2 0.2 0.2"
+           directional="true"
+           castshadow="true"/>
+
+    <!-- FILL LIGHTS: Softer ambient fill from sides -->
+    <light name="fill_left"
+           pos="-8 -4 6"
+           dir="0.6 0.3 -0.8"
+           diffuse="0.35 0.35 0.35"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <light name="fill_right"
+           pos="8 -4 6"
+           dir="-0.6 0.3 -0.8"
+           diffuse="0.35 0.35 0.35"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <!-- RIM LIGHT: Subtle back separation -->
+    <light name="rim_light"
+           pos="0 8 5"
+           dir="0 -1 -0.5"
+           diffuse="0.25 0.25 0.25"
+           specular="0.1 0.1 0.1"
+           directional="true"
+           castshadow="false"/>
+
+    <body name="arena" pos="0 0 0">
+
+      <!-- STUDIO FLOOR: Infinite white epoxy plane with grid -->
+      <geom name="outside_floor"
+            type="plane"
+            pos="0 0 0"
+            size="500 500 1"
+            material="studio_floor_mat"
+            friction="0.005 0.0001 0.0001"
+            solref="0.01 1.5"
+            solimp="0.9 0.95 0.01"
+            contype="1"
+            conaffinity="1"/>
+
+      <!-- PHYSICS RING: Invisible cylinder for collision + boundary detection -->
+      <geom name="sumo_ring"
+            type="cylinder"
+            size="7.5 1.0"
+            pos="0 0 1.0"
+            rgba="0 0 0 0"
+            friction="2.00 0.005 0.0001"
+            condim="3"
+            priority="1"
+            solref="0.005 1"
+            solimp="0.95 0.99 0.005"
+            margin="0.002"
+            contype="1"
+            conaffinity="1"
+            group="3"/>
+
+      <!-- VISUAL: Octagonal platform body (dark steel beveled sides) -->
+      <geom name="dohyo_body_visual"
+            type="mesh"
+            mesh="octagon_platform_mesh"
+            pos="0 0 1.0"
+            material="dohyo_surface"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- VISUAL: Octagonal gold top surface -->
+      <geom name="dohyo_top_visual"
+            type="mesh"
+            mesh="octagon_surface_mesh"
+            pos="0 0 2.002"
+            material="dohyo_top"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Center mark -->
+      <site name="center_mark"
+            type="cylinder"
+            pos="0 0 2.003"
+            size="0.05 0.001"
+            rgba="0.35 0.32 0.30 0.3"/>
+
+      <!-- Camera target body (for 3D, target center of ring) -->
+      <body name="ring_center" pos="0 0 2.5">
+        <geom name="ring_center_marker" type="sphere" size="0.001"
+              rgba="0 0 0 0" group="3" contype="0" conaffinity="0"/>
+      </body>
+
+      <!-- RED spawn (invisible site for position detection) -->
+      <site name="spawn/left"
+            pos="-3.75 0 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="red_start_line"
+            type="box"
+            pos="-3.75 0 2.003"
+            size="0.25 0.01 0.0005"
+            material="red_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- BLUE spawn (invisible site for position detection) -->
+      <site name="spawn/right"
+            pos="3.75 0 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="blue_start_line"
+            type="box"
+            pos="3.75 0 2.003"
+            size="0.25 0.01 0.0005"
+            material="blue_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Y-axis spawns (perpendicular to X-axis spawns) -->
+      <site name="spawn/front"
+            pos="0 -3.75 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <site name="spawn/back"
+            pos="0 3.75 2.3"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <!-- CAMERAS optimized for 3D viewing (7.5m radius ring) -->
+
+      <!-- 3/4 perspective -->
+      <camera name="side"
+              pos="9.0 -13.5 10.5"
+              mode="targetbody"
+              target="ring_center"
+              fovy="50"/>
+
+      <!-- Alternate angle - front quarter view -->
+      <camera name="front_quarter"
+              pos="12.0 7.5 9.0"
+              mode="targetbody"
+              target="ring_center"
+              fovy="48"/>
+
+      <!-- Dynamic tracking camera -->
+      <camera name="tracking"
+              pos="0 -12 10.5"
+              mode="trackcom"
+              fovy="55"/>
+
+      <!-- Top-down for reference -->
+      <camera name="topdown"
+              pos="0 0 25"
+              quat="1 0 0 0"
+              mode="trackcom"
+              fovy="55"/>
+
+    </body>
+  </worldbody>
+</mujoco>

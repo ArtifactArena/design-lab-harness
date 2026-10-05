@@ -1,0 +1,6 @@
+# DeepSeek V4 Pro via Together AI (key: TOGETHER_API_KEY). Reasoner model — thinks
+# natively, no enable_thinking flag needed. Direct alternative (key DEEPSEEK_API_KEY):
+#   model: deepseek/deepseek-reasoner
+model: together_ai/deepseek-ai/DeepSeek-V4-Pro
+temperature: 0.6
+max_tokens: 16384

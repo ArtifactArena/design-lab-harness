@@ -1,0 +1,12 @@
+# Qwen3.5 397B with thinking ON (via Together AI, key: TOGETHER_API_KEY). Thinking-mode
+# sampling per Qwen guidance (temp 0.6 / top_p 0.95). The nothinking sibling lives in
+# qwen3.5-397b-nothinking.yaml.
+model: together_ai/Qwen/Qwen3.5-397B-A17B
+temperature: 0.6
+top_p: 0.95
+max_tokens: 16384
+extra_body:
+  top_k: 20
+  min_p: 0
+  chat_template_kwargs:
+    enable_thinking: true

@@ -1,0 +1,7 @@
+# Claude Opus 5 — Anthropic model id `claude-opus-5` (listed by /v1/models, created 2026-07-24).
+model: anthropic/claude-opus-5
+temperature: 1.0
+max_tokens: 128000  # Anthropic native max_output_tokens
+# Native Anthropic effort (provider-managed budget), same shape as claude-opus-4-8-high.
+output_config:
+  effort: high

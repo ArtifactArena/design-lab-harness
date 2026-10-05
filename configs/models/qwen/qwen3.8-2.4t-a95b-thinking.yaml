@@ -1,0 +1,15 @@
+# Qwen 3.8 (2.4T-A95B) via Together — id `Qwen/Qwen3.8-2.4T-A95B`, thinking model,
+# 1M context. Replaces Qwen3.7-Max (2026-09-16): Together serves 3.7-Max, 3.7-Plus and
+# 3.8-Flash as streaming-only endpoints ("This model only supports streaming"), and the
+# DSPy loop makes non-streaming calls; 3.8-2.4T-A95B answers non-streaming.
+# Probed live 2026-09-16 with these exact params (reasoning_content returned, finish=stop).
+# Sampling params are Qwen's recommended thinking-mode values (temperature 0.6,
+# top_p 0.95, top_k 20, min_p 0), unchanged from the 3.5/3.7 configs.
+model: together_ai/Qwen/Qwen3.8-2.4T-A95B
+temperature: 0.6
+top_p: 0.95
+max_tokens: 81920
+num_retries: 10
+extra_body:
+  top_k: 20
+  min_p: 0

@@ -1,0 +1,11 @@
+# GLM 5.3 (Zhipu / z.ai) via Together — HIGH reasoning. Together id `zai-org/GLM-5.3`
+# (listed 2026-08-28). Same shape as glm-5.2-high: Together rejects top-level
+# reasoning_effort, so it is passed via extra_body; max_tokens pinned because litellm
+# has no model_info for this model.
+model: together_ai/zai-org/GLM-5.3
+temperature: 1.0
+top_p: 0.95
+max_tokens: 131072        # 128K output budget
+num_retries: 10
+extra_body:
+  reasoning_effort: high

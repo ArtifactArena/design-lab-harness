@@ -1,0 +1,37 @@
+<mujoco model="baseline_dodecahedron">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="dodecahedron"
+          vertex="0.165  0.165  0.165
+                  0.165  0.165 -0.165
+                  0.165 -0.165  0.165
+                  0.165 -0.165 -0.165
+                 -0.165  0.165  0.165
+                 -0.165  0.165 -0.165
+                 -0.165 -0.165  0.165
+                 -0.165 -0.165 -0.165
+                  0.000  0.102  0.267
+                  0.000  0.102 -0.267
+                  0.000 -0.102  0.267
+                  0.000 -0.102 -0.267
+                  0.102  0.267  0.000
+                  0.102 -0.267  0.000
+                 -0.102  0.267  0.000
+                 -0.102 -0.267  0.000
+                  0.267  0.000  0.102
+                  0.267  0.000 -0.102
+                 -0.267  0.000  0.102
+                 -0.267  0.000 -0.102"
+          scale="1 1 1"/>
+    <material name="steel" rgba="0.90 0.80 0.20 1" specular="0.6" shininess="0.5"/>
+  </asset>
+  <worldbody>
+    <body name="bot" pos="0 0 0.30">
+      <freejoint name="root"/>
+      <geom name="dodeca_geom" type="mesh" mesh="dodecahedron"
+            material="steel" mass="200"
+            friction="0.6 0.005 0.0001"/>
+    </body>
+  </worldbody>
+  <actuator/>
+</mujoco>

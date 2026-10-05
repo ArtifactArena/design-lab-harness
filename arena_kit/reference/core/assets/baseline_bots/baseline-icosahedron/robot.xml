@@ -1,0 +1,29 @@
+<mujoco model="baseline_icosahedron">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="icosahedron"
+          vertex="0.000  0.300  0.186
+                  0.000  0.300 -0.186
+                  0.000 -0.300  0.186
+                  0.000 -0.300 -0.186
+                  0.300  0.186  0.000
+                  0.300 -0.186  0.000
+                 -0.300  0.186  0.000
+                 -0.300 -0.186  0.000
+                  0.186  0.000  0.300
+                 -0.186  0.000  0.300
+                  0.186  0.000 -0.300
+                 -0.186  0.000 -0.300"
+          scale="1 1 1"/>
+    <material name="steel" rgba="0.15 0.45 0.90 1" specular="0.6" shininess="0.5"/>
+  </asset>
+  <worldbody>
+    <body name="bot" pos="0 0 0.35">
+      <freejoint name="root"/>
+      <geom name="ico_geom" type="mesh" mesh="icosahedron"
+            material="steel" mass="200"
+            friction="0.6 0.005 0.0001"/>
+    </body>
+  </worldbody>
+  <actuator/>
+</mujoco>

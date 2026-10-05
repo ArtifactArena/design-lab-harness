@@ -1,0 +1,5 @@
+model: openai/gpt-5.3-codex
+model_type: responses
+max_output_tokens: 128000  # OpenAI native max_output_tokens
+reasoning:
+  effort: high

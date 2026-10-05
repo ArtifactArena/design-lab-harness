@@ -1,0 +1,5 @@
+# Grok 4.20 reasoning endpoint — reasoning is native to this model variant, so no
+# reasoning_effort is set (adding it can raise under litellm drop_params=False).
+model: xai/grok-4.20-0309-reasoning
+temperature: 1.0
+max_tokens: 32000

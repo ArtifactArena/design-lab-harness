@@ -1,0 +1,12 @@
+# MiniMax M3 via Together AI (key: TOGETHER_API_KEY) — HIGH reasoning.
+# reasoning_effort passed via extra_body (Together rejects it as a top-level param).
+# timeout/num_retries pinned: the model is slow on long structured generations and
+# the harness default (600s x 10 retries) looped for ~100min producing nothing —
+# fail-fast with one long attempt instead.
+model: together_ai/MiniMaxAI/MiniMax-M3
+temperature: 1.0
+top_p: 0.95
+max_tokens: 98304
+num_retries: 1
+extra_body:
+  reasoning_effort: high

@@ -1,0 +1,15 @@
+# GPT-5.6 Sol — flagship "workhorse" of the GPT-5.6 family (GA 2026-07-09).
+# API id verified live via /v1/models. $5/M in, $30/M out.
+model: openai/gpt-5.6-sol
+model_type: responses
+# Responses API wire names (2026-09-17 fix): DSPy hands this yaml to litellm.responses(),
+# which only knows `reasoning.effort` and `max_output_tokens`; the chat-completions
+# spellings `reasoning_effort` / `max_tokens` were silently DROPPED, so every earlier run
+# went out at OpenAI's default effort with no output cap. tests/test_model_config_wire.py
+# asserts the body the provider receives.
+temperature: 1.0
+max_output_tokens: 128000  # OpenAI native max_output_tokens (same budget as gpt-5.5)
+reasoning:
+  effort: high
+num_retries: 10   # ride through transient quota/rate flaps (kimi/minimax pattern);
+                  # exp backoff bridges ~10-20min outages instead of killing the run

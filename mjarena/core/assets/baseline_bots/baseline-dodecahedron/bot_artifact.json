@@ -1,0 +1,33 @@
+{
+  "name": "Aether Dodecahedron",
+  "generator": "dodecahedron",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary dodecahedron baseline embodying aether element. No actuators. 12-faced geometric form.",
+    "overview": "A transcendent dodecahedron symbolizing aether with 12 pentagonal faces. Serves as a platonic solid baseline with elemental inspiration.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "Dodecahedral geometry with 12 pentagonal faces provides complex angular resistance, creating a mystical defensive posture."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a platonic solid baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary aether dodecahedron — platonic solid baseline",
+    "element": "Aether",
+    "faces": 12
+  }
+}

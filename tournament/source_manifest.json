@@ -1,0 +1,13 @@
+{
+  "commit": "86ccd5c9efc74b4c9e3645a1dc6d963c73fb3143",
+  "local_prompt_patch_sha256": "22b79478c7c39b1338bb9e2d888118c1946f8a2012540553286f9f203ae216df",
+  "template_sha256": "d81c6f2ffa01dd49f34dfe5767eee666ddb90940c420a88dd647ca8cc576ef48",
+  "sampling_prompt_sha256": "210e714199d8098353452e5a8e415565914226bac52eddfa9f5d8021b89e0276",
+  "monitoring_instrumentation": "Record pre-action opponent_surface_distance per control step; excludes prompt/downsampled feedback; no physics/controller changes.",
+  "instrumented_files": {
+    "mjarena/runner/episode.py": "68fcb7314b1e337f97e5d6c12272f92546017c5ba955c7dbac47c460fce92435",
+    "mjarena/design_shop/types.py": "47fe68bc9f74cb4d1437cae8c71b9b6c6ed5c74dc074043c85d6bc1390348e02",
+    "arena_kit/reference/runner/episode.py": "68fcb7314b1e337f97e5d6c12272f92546017c5ba955c7dbac47c460fce92435",
+    "arena_kit/reference/design_shop/types.py": "47fe68bc9f74cb4d1437cae8c71b9b6c6ed5c74dc074043c85d6bc1390348e02"
+  }
+}

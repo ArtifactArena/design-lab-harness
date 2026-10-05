@@ -1,0 +1,16 @@
+# Kimi K3 (Moonshot) via Together — HIGH reasoning. Needs TOGETHER_API_KEY.
+# Mirrors the arena repo's configs/models/kimi/kimi-k3-high.yaml:
+# - K3's sampling params are FIXED server-side -> omit temperature/top_p
+#   (unlike K2.5/K2.7 configs).
+# - reasoning_effort in {low,high,max}, default max; passed via extra_body
+#   (Together rejects it as a top-level litellm param, same as GLM/K2.7).
+# - max_tokens pinned at K3's native max output (1M) — verified accepted by
+#   Together 2026-08-09; litellm has no model_info for K3, null would raise.
+# - Long-call tail: K3 high-effort calls median ~7 min but tail out to 80+
+#   min, and rare server-side hangs leave the socket open forever (K2.5
+#   precedent) — if a run sits silent >2h at 0% CPU, kill and retry the step.
+model: together_ai/moonshotai/Kimi-K3
+max_tokens: 1048576
+num_retries: 10
+extra_body:
+  reasoning_effort: high

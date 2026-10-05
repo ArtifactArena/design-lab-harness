@@ -1,0 +1,67 @@
+<mujoco description="LeashWedge Center Patrol: a low six-wheel wedge pusher with reduced gearing and center-leashed driving for qualification-safe combat">
+  <worldbody description="Contains the complete robot body tree; the simulator supplies the elevated circular arena">
+    <body name="chassis" pos="0 0 0.27" description="Root low chassis frame positioned so the six 0.22 m radius wheels initially touch the arena surface">
+      <freejoint name="root" description="Required six degree of freedom free joint allowing the robot to translate and rotate freely in the 3D arena"/>
+      <geom name="chassis_core" type="box" size="0.55 0.36 0.035" material="carbon_fiber" description="Wide lightweight structural deck tying wheels, wedge, rails, and ballast together while keeping root mass low"/>
+      
+      <body name="low_tungsten_keel" pos="0 0 -0.20" description="Dense low child body used as ballast to lower the center of mass without overloading the root body">
+        <geom name="keel_ballast" type="box" size="0.20 0.28 0.020" material="tungsten" description="Compact tungsten keel mounted close to the floor to resist pitch and roll flips during acceleration and impacts"/>
+      </body>
+      
+      <body name="front_wedge_body" pos="0.62 0 -0.13" description="Rigid front wedge body overlapping the chassis and projecting a low attack surface forward">
+        <geom name="front_wedge_plate" type="box" size="0.46 0.52 0.018" euler="0 0.16 0" material="carbon_fiber" description="Shallow sloped carbon-fiber wedge plate with a low front lip for getting under opponents without digging into the floor"/>
+      </body>
+      
+      <body name="left_antiroll_rail" pos="0 0.64 -0.13" description="Left protective side rail mounted just above the floor to catch rollovers before the chassis flips fully">
+        <geom name="left_side_skid" type="box" size="0.56 0.030 0.035" material="plastic" description="Low-friction plastic skid rail that slides if it contacts the floor during roll, reducing tumble energy"/>
+      </body>
+      
+      <body name="right_antiroll_rail" pos="0 -0.64 -0.13" description="Right protective side rail symmetric with the left rail to improve roll stability in both directions">
+        <geom name="right_side_skid" type="box" size="0.56 0.030 0.035" material="plastic" description="Low-friction plastic skid rail that limits roll angle while avoiding high-friction snagging on the arena"/>
+      </body>
+      
+      <body name="rear_skid_body" pos="-0.70 0 -0.13" description="Rear skid body protecting against backward wheelies and tail strikes during reversing or impacts">
+        <geom name="rear_tail_skid" type="box" size="0.12 0.42 0.035" material="plastic" description="Plastic rear bumper-skid that catches excessive pitch-back motion and slides rather than gripping"/>
+      </body>
+      
+      <body name="front_left_wheel_body" pos="0.48 0.49 -0.05" description="Front left powered wheel body placed wide and forward for wedge-side traction and pitch stability">
+        <joint name="axle_fl" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the front left wheel so positive torque drives the robot forward along local positive X"/>
+        <geom name="front_left_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber front left tire with cylinder axis aligned to the Y-axis axle for rolling contact"/>
+      </body>
+      
+      <body name="middle_left_wheel_body" pos="0.00 0.49 -0.05" description="Middle left powered wheel body adding central support so the robot remains grounded during impacts">
+        <joint name="axle_ml" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the middle left drive wheel contributing steady traction and yaw control"/>
+        <geom name="middle_left_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber middle left tire supporting the low ballast and maintaining contact over small pitch changes"/>
+      </body>
+      
+      <body name="rear_left_wheel_body" pos="-0.48 0.49 -0.05" description="Rear left powered wheel body placed far back to lengthen the wheelbase and prevent wheelies">
+        <joint name="axle_rl" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the rear left drive wheel used for propulsion and differential steering"/>
+        <geom name="rear_left_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber rear left tire extending the support polygon for pitch stability"/>
+      </body>
+      
+      <body name="front_right_wheel_body" pos="0.48 -0.49 -0.05" description="Front right powered wheel body symmetric with front left for balanced six-wheel drive">
+        <joint name="axle_fr" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the front right wheel so positive torque drives the robot forward along local positive X"/>
+        <geom name="front_right_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber front right tire aligned with its axle for stable forward rolling"/>
+      </body>
+      
+      <body name="middle_right_wheel_body" pos="0.00 -0.49 -0.05" description="Middle right powered wheel body adding central traction and reducing chassis rocking">
+        <joint name="axle_mr" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the middle right drive wheel contributing to smooth six-wheel propulsion"/>
+        <geom name="middle_right_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber middle right tire that keeps the robot supported near its center of mass"/>
+      </body>
+      
+      <body name="rear_right_wheel_body" pos="-0.48 -0.49 -0.05" description="Rear right powered wheel body completing the long, wide, stable drive base">
+        <joint name="axle_rr" type="hinge" axis="0 1 0" description="Y-axis hinge axle for the rear right drive wheel used for forward push and turning"/>
+        <geom name="rear_right_wheel" type="cylinder" size="0.22 0.055" euler="1.5708 0 0" material="rubber" description="High-grip rubber rear right tire extending the wheelbase and resisting pitch flips"/>
+      </body>
+    </body>
+  </worldbody>
+  
+  <actuator description="Six reduced-torque wheel motors for controlled differential-drive motion without violent self-launching">
+    <motor name="motor_fl" joint="axle_fl" gear="300" description="Front left wheel motor with reduced torque for safer center-leashed engagement"/>
+    <motor name="motor_ml" joint="axle_ml" gear="300" description="Middle left wheel motor adding steady left-side traction with lower acceleration"/>
+    <motor name="motor_rl" joint="axle_rl" gear="300" description="Rear left wheel motor contributing propulsion while keeping per-wheel torque manageable"/>
+    <motor name="motor_fr" joint="axle_fr" gear="300" description="Front right wheel motor paired with left motors for differential steering"/>
+    <motor name="motor_mr" joint="axle_mr" gear="300" description="Middle right wheel motor adding steady right-side traction with lower acceleration"/>
+    <motor name="motor_rr" joint="axle_rr" gear="300" description="Rear right wheel motor completing the six-wheel-drive system"/>
+  </actuator>
+</mujoco>

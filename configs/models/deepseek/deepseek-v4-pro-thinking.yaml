@@ -1,0 +1,14 @@
+# Together dropped the undated id `DeepSeek-V4-Pro` (verified missing 2026-09-16); the
+# live id is the dated snapshot.
+model: together_ai/deepseek-ai/DeepSeek-V4-Pro-0813
+# Together-recommended params for V4 Pro (NOT the V3.1 0.6/0.95 defaults).
+temperature: 1.0
+top_p: 1.0
+max_tokens: 65536
+num_retries: 10
+# V4 thinking shape — verified via dspy.LM end-to-end. Note: V4 changed the
+# thinking-toggle from V3.1's `extra_body.reasoning.enabled` to `extra_body.
+# thinking.type=enabled`. The V3.1 shape is silently a no-op on V4.
+extra_body:
+  thinking:
+    type: enabled

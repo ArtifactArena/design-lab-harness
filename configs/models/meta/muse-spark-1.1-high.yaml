@@ -1,0 +1,22 @@
+# Meta Muse Spark 1.1 (Meta Superintelligence Labs) — HIGH reasoning, OEH runs.
+# Served on the Meta Model API (public preview, 2026-07-09): OpenAI-compatible
+# at https://api.meta.ai/v1, model id "muse-spark-1.1". 1M-token context.
+# $1.25/M in, $4.25/M out.
+#
+# litellm has no meta.ai provider, so we route through the openai/ provider with
+# an api_base override. api_key uses litellm's os.environ/ secret reference so
+# no key is committed here — export MODEL_API_KEY (Meta's documented env name)
+# before running; without the override litellm would wrongly send OPENAI_API_KEY.
+#
+# Meta documents "reasoning effort is adjustable per request"; the API is
+# OpenAI-compatible so reasoning_effort is passed top-level. NOT yet smoke-tested
+# — no MODEL_API_KEY on this machine; verify (and fall back to extra_body:) once
+# a key is provisioned.
+model: openai/muse-spark-1.1
+api_base: https://api.meta.ai/v1
+api_key: os.environ/MODEL_API_KEY
+temperature: 1.0
+max_tokens: 131072  # OEH agent loop: reasoning shares the completion budget with
+                    # the tool-call JSON; 32K caused ~70% parse errors for other
+                    # reasoners (kimi lesson), so give ample headroom.
+reasoning_effort: high

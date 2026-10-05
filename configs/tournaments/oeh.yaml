@@ -1,0 +1,61 @@
+# OEH — Open-Ended harness run: the same roster as ARH and SH.
+# NOT EXECUTED BY run_baseline_agent.py. The Open-Ended harness itself lives in the
+# separate `design-lab-harness` repository and is launched from there; this file is the roster
+# of record for that run so the three harness runs (arh.yaml, sh.yaml, oeh.yaml) cannot
+# drift apart. tests/test_redo_config.py asserts all three carry
+# configs/models/run-roster-2026-09.yaml verbatim and all three load through
+# config_to_args, so it must satisfy this repo's config schema even though this repo
+# never runs it.
+#
+# The design-lab-harness repo's configs/models/ use the same litellm yaml shape as configs/models/
+# here; copy the roster's model files across when launching.
+
+base: base.yaml
+
+llms:
+  - configs/models/anthropic/claude-fable-5-1-high.yaml
+  - configs/models/anthropic/claude-fable-5-high.yaml
+  - configs/models/anthropic/claude-opus-5-high.yaml
+  - configs/models/anthropic/claude-sonnet-5-high.yaml
+  - configs/models/anthropic/claude-opus-4-7-high.yaml
+  - configs/models/anthropic/claude-opus-4-8-high.yaml
+  - configs/models/openai/gpt-6-astra.yaml
+  - configs/models/openai/gpt-5.6-luna.yaml
+  - configs/models/openai/gpt-5.6-sol.yaml
+  - configs/models/openai/gpt-5.6-terra.yaml
+  - configs/models/openai/gpt-5.5.yaml
+  - configs/models/openai/gpt-5.4.yaml
+  - configs/models/openai/gpt-5.3-codex-high.yaml
+  - configs/models/google/gemini-3-1-pro-high.yaml
+  - configs/models/google/gemini-3-8-flash-high.yaml
+  - configs/models/xai/grok-4.6-high.yaml
+  - configs/models/xai/grok-4.5-high.yaml
+  - configs/models/xai/grok-4.20-reasoning.yaml
+  - configs/models/deepseek/deepseek-v4-pro-thinking.yaml
+  - configs/models/kimi/kimi-k3-high.yaml
+  - configs/models/minimax/minimax-m3-high.yaml
+  - configs/models/qwen/qwen3.8-2.4t-a95b-thinking.yaml
+  - configs/models/zai/glm-5.3-high.yaml
+  - configs/models/zai/glm-5.2-high.yaml
+
+season:
+  env: PROD
+  season_id: oeh
+  tournament_id: oeh
+  iterations: 5              # independent runs per model (one design journal each)
+  output_dir: LOGS-OEH/{date}/{tournament_id}
+
+models_as_engineers:
+  unified_generation: true
+  zero_shot_mode: false
+  commit_budget: 50          # LLM-call budget per run, as the design-lab-harness harness counts it
+  # Required by BuildConfig here (one big prompt per harness); the design-lab-harness repo
+  # ignores the key and sends its own consolidated document.
+  autoresearch_prompt_path: configs/rules/autoresearch_prompt.md
+  use_dspy_cache: false
+  n_parallel_builds: 1
+
+output:
+  verbose: true
+  debug_all: true
+  dump_prompt: true

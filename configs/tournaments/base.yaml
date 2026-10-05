@@ -1,0 +1,98 @@
+# Base tournament config.
+# Child configs can inherit via:  base: base.yaml
+# and override only the fields they need.
+#
+# Run with:  python run_baseline_agent.py --config configs/tournaments/<child>.yaml
+
+llms: []
+
+# =============================================================================
+# Rules — what are the rules of the game?
+# =============================================================================
+rules:
+  arena: mjarena/assets/sumo_ring_env_cinematic_3d.xml
+  constraints: configs/rules/rules.yaml
+  physics_mode: 3d
+  off_the_ring_criteria: any                    # any | majority
+  contact_fidelity: high                        # high (0.01s control, 100Hz) | low (0.02s control, 50Hz)
+  controller:
+    match_time: 20                              # qualification match length (s); the inactivity rule
+                                                # (tournament.match below) is armed in qualification too
+
+# =============================================================================
+# Season — run identity and structure
+# =============================================================================
+season:
+  env: DEBUG
+  season_id: season_00
+  tournament_id: tournament
+  iterations: 10
+  output_dir: logs/{date}/{tournament_id}
+
+# =============================================================================
+# Models as Engineers — how LLMs generate bots
+# =============================================================================
+models_as_engineers:
+  morphology_k: 1
+  controller_k: 1
+  commit_budget: 50                             # commits per build; also what the prompt tells the model
+  unified_generation: true
+
+  use_dspy_cache: false
+  use_generator_name_in_prompt: true
+
+
+  max_obs_lookback: 20
+  max_action_lookback: 20
+  n_parallel_builds: 6
+  init_seed: 42
+
+
+# =============================================================================
+# Tournament — how to run competitions between generated bots
+# =============================================================================
+tournament:
+  match:
+    match_time: 300                             # 5 minutes = 30,000 steps at 0.01 s
+    inactivity_timeout: 10.0
+    inactivity_min_displacement: 0.5
+    n_rollouts: 5
+    save_video: true
+    video_width: 1920
+    video_height: 1080
+    camera: tracking
+  save_all_videos: true
+  highres: false
+  n_parallel_tournament: 1
+  include_baselines: true
+  agents:
+    observation:
+      arena_grid: true
+      arena_mass_grid: true
+      edge_distance_grid: true
+      arena_grid_cell_size: 0.25
+      bounding_radius: true
+      ring_radius: true
+
+# =============================================================================
+# Elo — rating system
+# =============================================================================
+elo:
+  method: bt
+  level: model
+  strategy: cumulative
+  top_k: 3
+  bootstrap: 0
+  exclude_forfeits: false
+  title: ""
+  force: true
+  build_stats: true
+
+# =============================================================================
+# Output — logging and debug
+# =============================================================================
+output:
+  verbose: true
+  debug_all: true
+  dump_prompt: false
+  save_intermediate_candidates: false

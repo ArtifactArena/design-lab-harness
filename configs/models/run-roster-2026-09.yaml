@@ -1,0 +1,46 @@
+# Model roster for the September 2026 runs — the SINGLE list that both the
+# AutoResearch (ARH) run and the Sampling (zero-shot) run use.
+#
+#   ARH:      configs/tournaments/arh.yaml
+#   SH:       configs/tournaments/sh.yaml
+#   OEH:      configs/tournaments/oeh.yaml (roster of record; launched from the design-lab-harness repo)
+#
+# run_baseline_agent.py resolves only one level of `base:`, so the two run
+# configs copy this list verbatim; tests/test_redo_config.py asserts that each of
+# them equals this roster exactly, so edit HERE first and then mirror the change.
+#
+# 24 models, verified against each provider's live model list on 2026-09-16:
+# latest of each family (opus-5, sonnet-5, gpt-6-astra, gemini-3.8-flash, grok-4.6,
+# DeepSeek-V4-Pro-0813, GLM-5.3 alongside GLM-5.2, Qwen3.8-2.4T-A95B); dropped gpt-5.2-codex, grok-code-fast-1
+# (no longer served by xAI), kimi-k2.7-code, opus-4-6, sonnet-4-6.
+
+llms:
+  # Anthropic
+  - configs/models/anthropic/claude-fable-5-1-high.yaml
+  - configs/models/anthropic/claude-fable-5-high.yaml
+  - configs/models/anthropic/claude-opus-5-high.yaml
+  - configs/models/anthropic/claude-sonnet-5-high.yaml
+  - configs/models/anthropic/claude-opus-4-7-high.yaml
+  - configs/models/anthropic/claude-opus-4-8-high.yaml
+  # OpenAI
+  - configs/models/openai/gpt-6-astra.yaml
+  - configs/models/openai/gpt-5.6-luna.yaml
+  - configs/models/openai/gpt-5.6-sol.yaml
+  - configs/models/openai/gpt-5.6-terra.yaml
+  - configs/models/openai/gpt-5.5.yaml
+  - configs/models/openai/gpt-5.4.yaml
+  - configs/models/openai/gpt-5.3-codex-high.yaml
+  # Google
+  - configs/models/google/gemini-3-1-pro-high.yaml
+  - configs/models/google/gemini-3-8-flash-high.yaml
+  # xAI
+  - configs/models/xai/grok-4.6-high.yaml
+  - configs/models/xai/grok-4.5-high.yaml
+  - configs/models/xai/grok-4.20-reasoning.yaml
+  # Open-weight / other (Together)
+  - configs/models/deepseek/deepseek-v4-pro-thinking.yaml
+  - configs/models/kimi/kimi-k3-high.yaml
+  - configs/models/minimax/minimax-m3-high.yaml
+  - configs/models/qwen/qwen3.8-2.4t-a95b-thinking.yaml
+  - configs/models/zai/glm-5.3-high.yaml
+  - configs/models/zai/glm-5.2-high.yaml

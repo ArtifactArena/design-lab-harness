@@ -1,0 +1,11 @@
+# GPT-6 Astra — OpenAI GPT-6 family.
+# API id `openai/gpt-6-astra` verified live 2026-09-16 (Responses API, one-line probe
+# answered in 3 s with reasoning_effort=high).
+model: openai/gpt-6-astra
+model_type: responses
+temperature: 1.0
+max_output_tokens: 128000  # OpenAI native max_output_tokens (same budget as gpt-5.5 / gpt-5.6)
+reasoning:
+  effort: high
+num_retries: 10   # ride through transient quota/rate flaps (kimi/minimax pattern);
+                  # exp backoff bridges ~10-20min outages instead of killing the run

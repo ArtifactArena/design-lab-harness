@@ -1,0 +1,8 @@
+# Grok 4.6 (high reasoning effort) — xAI id `grok-4.6` (listed by api.x.ai/v1/models,
+# created 2026-08-05). Same shape as grok-4.5-high: reasoning is native/always-on and
+# reasoning_effort goes through extra_body (litellm rejects it top-level for xai).
+model: xai/grok-4.6
+temperature: 1.0
+max_tokens: 131072
+extra_body:
+  reasoning_effort: high

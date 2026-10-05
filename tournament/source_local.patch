@@ -1,0 +1,13 @@
+diff --git a/arena_kit/agent.md b/arena_kit/agent.md
+index b954246..32b090f 100644
+--- a/arena_kit/agent.md
++++ b/arena_kit/agent.md
+@@ -44,6 +44,8 @@ End each response with one or more fenced JSON tool calls, including when you de
+ 
+ Multiple calls in one response execute in the order you write them. Their results are returned together on the next model turn. You can write `robot.xml`, write `controller.py`, and then call `does_bot_qualify` in a single response, because those calls can be specified without first seeing their results.
+ 
++Tool calls on the final turn still execute, but you will not receive their feedback.
++
+ Use a later turn when deciding a call requires an earlier call's result. For example, you can run a match on one turn, then use its returned `match_id` and outcomes to decide what analysis to run on the next. Similarly, you can revise your bot using the evidence returned from the previous turn and request new tests for that revision in the same response.
+ 
+ A model turn is one API call. One API call may request any number of tool calls, and those tool calls do not count against the {{model_turn_budget}}-call budget. Reading and reacting to their results requires another API call.

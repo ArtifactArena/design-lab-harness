@@ -1,0 +1,33 @@
+{
+  "name": "Water Icosahedron",
+  "generator": "icosahedron",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary icosahedron baseline embodying water element. No actuators. 20-faced geometric form.",
+    "overview": "A fluid icosahedron symbolizing water with 20 triangular faces. Serves as a platonic solid baseline with elemental inspiration.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "Icosahedral geometry provides multifaceted deflection with 20 contact points, distributing impact forces in complex patterns like flowing water."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a platonic solid baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary water icosahedron — platonic solid baseline",
+    "element": "Water",
+    "faces": 20
+  }
+}

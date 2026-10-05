@@ -1,0 +1,21 @@
+# 10 opponents that every forecaster in no_anthropic.yaml (gpt-5.2-medium,
+# gemini-3-flash-high, grok-code-fast-1) has at least one head-to-head match
+# against in the `all-frontier-complete` tournament.
+#
+# Picked for GROUND-TRUTH coverage:
+#   - Top 2 have dense 5-round-per-forecaster match data and non-prior match
+#     Elo (claude-opus-4-5-medium, claude-opus-4-5-high).
+#   - Remaining 8 have 1 round per forecaster (noisy p_match) and sit on the
+#     BT-prior plateau (910.3), so their match Elo is uninformative — but their
+#     directed match probabilities are still comparable to the forecasts.
+opponents:
+  - claude-opus-4-5-medium       # match_elo 1198.3, 5r × 3 forecasters
+  - claude-opus-4-5-high         # match_elo  976.8, 5r × 3 forecasters
+  - claude-opus-4-6-high         # 1r × 3, BT prior
+  - claude-sonnet-4-5-high       # 1r × 3, BT prior
+  - claude-sonnet-4-6-high       # 1r × 3, BT prior
+  - gemini-2-5-flash-high        # 1r × 3, BT prior
+  - gemini-2-5-pro-high          # 1r × 3, BT prior
+  - gemini-3-1-pro-high          # 1r × 3, BT prior
+  - gemini-3-flash-medium        # 1r × 3, BT prior
+  - gpt-5.2-pro                  # 1r × 3, BT prior

@@ -1,0 +1,25 @@
+# Tested environment: Python 3.10, macOS (physics-only, MUJOCO_GL=) and Linux/EGL.
+# Versions below are the ones this harness was run and tested with.
+
+# Core — agent loop, validation, matches
+mujoco==3.10.0
+numpy==2.1.3
+scipy==1.15.3
+litellm==1.80.11
+dspy==3.0.4
+PyYAML==6.0.2
+gymnasium==1.2.0
+lxml==6.0.1
+imageio==2.37.0
+tqdm==4.67.1
+
+# Tests (MUJOCO_GL= pytest tests/ -q)
+pytest==9.0.2
+
+# Optional — only needed for rendering match videos / screenshots
+matplotlib==3.10.5
+imageio-ffmpeg==0.6.0
+pillow==11.3.0
+
+# Optional — reasoning-token counts in run stats (harness degrades gracefully without it)
+tiktoken==0.12.0

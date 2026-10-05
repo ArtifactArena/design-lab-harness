@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Qualification Baseline Block (3D)
+
+The opponent every commit must not lose to. Palette plastic (950 kg/m3, sliding
+friction 0.25 — configs/rules/materials_store.yaml) in a box of half-extents
+0.60 0.60 0.125, i.e. a 1.2 x 1.2 x 0.25 m slab:
+
+    volume = 1.2 x 1.2 x 0.25 = 0.36 m3
+    mass   = 0.36 x 950       = 342 kg
+
+User decision 2026-09-16 (audit flag F-N11): the block is made of a palette
+material like every other asset in the arena, and weighs roughly a third to a
+half of the 800 kg mass cap, so shoving it off the ring is a real test of a
+design. Plastic's low sliding friction lets the slab slide rather than grip, so
+a bot that gets under it can still move it.
+
+Nothing here is a hand-picked physics number:
+  * mass= is the palette product above, baked so that any path composing this
+    file raw weighs the same slab as qualification does.
+  * contact settings are the environment's: composition runs both robot trees
+    through normalize_robot_collision_settings, which owns condim (6),
+    priority (2), solref, solimp, margin and gap.
+  * sliding friction is NOT baked — the qualification path resolves it from the
+    palette (0.25, via mjarena.core.qualification_block). A path that composes
+    this file raw carries no friction of its own, so composition falls back to
+    a sliding friction of 1.0 for it.
+
+Has a freejoint for 3D physics but no actuators, so it just sits there until
+pushed; its blue_ prefix exempts it from the inactivity rule.
+-->
+<mujoco model="stationary_block_3d">
+  <compiler angle="radian"/>
+
+  <asset>
+    <!-- visual only; the physics of the same name comes from the palette -->
+    <material name="plastic" rgba="0.95 0.95 0.95 1" specular="0.1" shininess="0.1"/>
+  </asset>
+
+  <default>
+    <joint damping="0.0" armature="0.0"/>
+  </default>
+
+  <worldbody>
+    <body name="block" pos="0 0 0">
+      <freejoint name="root"/>
+
+      <!-- 1.2 x 1.2 x 0.25 m plastic slab, 342 kg -->
+      <geom name="block_geom" type="box" size="0.60 0.60 0.125"
+            material="plastic" mass="342"/>
+    </body>
+  </worldbody>
+
+  <!-- No actuators - this is a stationary block -->
+  <actuator>
+  </actuator>
+</mujoco>

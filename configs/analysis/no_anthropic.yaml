@@ -1,0 +1,13 @@
+# Curated models list for the gap-analysis pipeline.
+# Skips Anthropic (credit balance issues at time of writing) and uses the
+# best-per-provider picks from the all-frontier-complete tournament.
+# Re-add the Anthropic line once credits are available.
+models:
+  - id: gpt-5.2-medium
+    lm_name: openai/gpt-5.2
+    reasoning_effort: medium
+  - id: gemini-3-flash-high
+    lm_name: gemini/gemini-3-flash-preview
+    reasoning_effort: high
+  - id: grok-code-fast-1
+    lm_name: xai/grok-code-fast-1

@@ -1,0 +1,31 @@
+{
+  "name": "Box",
+  "generator": "box",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary steel block baseline. No actuators.",
+    "overview": "A 0.7m steel cube that sits still. Used as ELO calibration anchor.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "High mass from steel density provides resistance to pushing."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a calibration baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary steel block for ELO calibration"
+  }
+}

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="sumo_luxury_studio">
+  <compiler angle="radian"/>
+  <option gravity="0 0 -9.81"/>
+
+  <!-- =============== ASSETS =============== -->
+  <asset>
+    <!-- Studio cyclorama: white to light gray gradient -->
+    <texture name="studio_sky" type="skybox"
+             builtin="gradient" width="2048"
+             rgb1="1.0 1.0 1.0"
+             rgb2="0.95 0.95 0.96"
+             mark="none"/>
+
+    <!-- Luxury white/grey checker floor (like MuJoCo default) -->
+    <!-- Increased contrast: 0.95 vs 0.7 (was 0.95 vs 0.85) -->
+    <!-- Bigger squares: 4x4 grid (was 8x8) -->
+    <texture name="studio_floor_tex" type="2d" builtin="checker"
+             rgb1="0.95 0.95 0.95"
+             rgb2="0.70 0.70 0.70"
+             width="512" height="512"
+             mark="edge"
+             markrgb="0.60 0.60 0.60"/>
+    <material name="studio_floor_mat"
+              texture="studio_floor_tex"
+              texrepeat="2 2"
+              texuniform="true"
+              specular="0.0"
+              shininess="0.0"
+              reflectance="0.00"
+              emission="0"/>
+
+    <!-- Dohyō ring: muted clay/composite surface -->
+    <material name="dohyo_surface"
+              rgba="0.82 0.78 0.72 1.0"
+              specular="0.05"
+              shininess="0.1"
+              reflectance="0.02"
+              emission="0"/>
+
+    <!-- Dohyō boundary marking: clean circular line -->
+    <material name="dohyo_boundary"
+              rgba="0.35 0.32 0.30 1.0"
+              specular="0"
+              shininess="0"
+              reflectance="0"/>
+
+    <!-- Dohyō side bevel (subtle darker edge) -->
+    <material name="dohyo_bevel"
+              rgba="0.72 0.68 0.62 1.0"
+              specular="0.03"
+              shininess="0.05"
+              reflectance="0"/>
+
+    <!-- Start position markers -->
+    <material name="red_marker"
+              rgba="0.85 0.20 0.20 0.8"
+              emission="0"/>
+    <material name="blue_marker"
+              rgba="0.20 0.35 0.85 0.8"
+              emission="0"
+              />
+  </asset>
+
+  <!-- =============== VISUALS =============== -->
+  <visual>
+    <!-- Perspective camera with moderate FOV -->
+    <global fovy="45" offwidth="1920" offheight="1080"/>
+    <!-- Soft ambient + controlled headlight -->
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.15 0.15 0.15" specular="0.05 0.05 0.05"/>
+    <!-- Clean depth range -->
+    <map fogstart="100" fogend="101" znear="0.01" zfar="100" haze="0"/>
+    <!-- Enable shadows for grounding -->
+    <quality shadowsize="4096" offsamples="4"/>
+  </visual>
+
+  <!-- =============== WORLD =============== -->
+  <worldbody>
+
+    <!-- KEY LIGHT: Main directional from above-front -->
+    <light name="key_light"
+           pos="4 -6 8"
+           dir="-0.3 0.5 -1"
+           diffuse="0.35 0.35 0.35"
+           specular="0.2 0.2 0.2"
+           directional="true"
+           castshadow="true"/>
+
+    <!-- FILL LIGHTS: Softer ambient fill from sides -->
+    <light name="fill_left"
+           pos="-8 -4 6"
+           dir="0.6 0.3 -0.8"
+           diffuse="0.35 0.35 0.35"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <light name="fill_right"
+           pos="8 -4 6"
+           dir="-0.6 0.3 -0.8"
+           diffuse="0.35 0.35 0.35"
+           specular="0 0 0"
+           directional="true"
+           castshadow="false"/>
+
+    <!-- RIM LIGHT: Subtle back separation -->
+    <light name="rim_light"
+           pos="0 8 5"
+           dir="0 -1 -0.5"
+           diffuse="0.25 0.25 0.25"
+           specular="0.1 0.1 0.1"
+           directional="true"
+           castshadow="false"/>
+
+    <body name="arena" pos="0 0 0">
+
+      <!-- STUDIO FLOOR: Infinite white epoxy plane with grid -->
+      <geom name="outside_floor"
+            type="plane"
+            pos="0 0 0"
+            size="500 500 1"
+            material="studio_floor_mat"
+            friction="0.005 0.0001 0.0001"
+            solref="0.01 1.5"
+            solimp="0.9 0.95 0.01"
+            contype="1"
+            conaffinity="1"/>
+
+      <!-- DOHYŌ PLATFORM: Raised circular ring (CRITICAL: radius=3.0 matches reward logic) -->
+      <!-- Main platform cylinder -->
+      <geom name="sumo_ring"
+            type="cylinder"
+            size="3.0 0.05"
+            pos="0 0 0.05"
+            material="dohyo_surface"
+            friction="1.00 0.005 0.0001"
+            condim="3"
+            priority="1"
+            solref="0.005 1"
+            solimp="0.95 0.99 0.005"
+            margin="0.002"
+            contype="1"
+            conaffinity="1"/>
+
+      <!-- Dohyō bevel edge (visual chamfer for realism) -->
+      <geom name="dohyo_bevel_edge"
+            type="cylinder"
+            size="3.02 0.005"
+            pos="0 0 0.005"
+            material="dohyo_bevel"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Boundary marking: thin cylinder ring at edge -->
+      <geom name="dohyo_boundary_ring"
+            type="cylinder"
+            size="2.98 0.001"
+            pos="0 0 0.101"
+            material="dohyo_boundary"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- Center mark (minimal logo position) -->
+      <site name="center_mark"
+            type="cylinder"
+            pos="0 0 0.101"
+            size="0.05 0.001"
+            rgba="0.35 0.32 0.30 0.3"/>
+
+      <!-- Camera target body (camera looks slightly below ring center to frame ring higher) -->
+      <body name="ring_center" pos="0 0 0.06">
+        <geom name="ring_center_marker" type="sphere" size="0.001"
+              rgba="0 0 0 0" group="3" contype="0" conaffinity="0"/>
+      </body>
+
+      <!-- RED START marker (invisible, used for spawn position detection) -->
+      <!-- Spawn at -1.5m for 3.0m separation (2x max_width_x_m) -->
+      <site name="spawn/left"
+            pos="-1.5 0 1.27"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="red_start_line"
+            type="box"
+            pos="-1.5 0 0.101"
+            size="0.25 0.01 0.0005"
+            material="red_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- BLUE START marker (invisible, used for spawn position detection) -->
+      <!-- Spawn at +1.5m for 3.0m separation (2x max_width_x_m) -->
+      <site name="spawn/right"
+            pos="1.5 0 1.27"
+            size="0.001"
+            rgba="0 0 0 0"
+            type="sphere"/>
+
+      <geom name="blue_start_line"
+            type="box"
+            pos="1.5 0 0.101"
+            size="0.25 0.01 0.0005"
+            material="blue_marker"
+            contype="0"
+            conaffinity="0"
+            group="1"/>
+
+      <!-- CAMERAS -->
+
+      <!-- 3/4 perspective "product demo" camera -->
+      <!-- Camera looks at ring center (0, 0, 0.1) -->
+      <camera name="side"
+              pos="5.5 -9.0 4.5"
+              mode="targetbody"
+              target="ring_center"
+              fovy="42"/>
+
+      <!-- Top-down for reference -->
+      <camera name="topdown"
+              pos="0 0 12"
+              quat="1 0 0 0"
+              mode="trackcom"
+              fovy="50"/>
+
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,622 @@
+{
+  "claude-3-5-sonnet": {
+    "config_path": "configs/models/anthropic/claude-3-5-sonnet.yaml",
+    "api_model": "anthropic/claude-3-5-sonnet-20241022",
+    "lmarena_name": "claude-3-5-sonnet-20241022",
+    "lmarena_elo": {
+      "overall": 1365,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-3-opus": {
+    "config_path": "configs/models/anthropic/claude-3-opus.yaml",
+    "api_model": "anthropic/claude-3-opus-20240229",
+    "lmarena_name": "claude-3-opus-20240229",
+    "lmarena_elo": {
+      "overall": 1275,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-haiku-4-5": {
+    "config_path": "configs/models/anthropic/claude-haiku-4-5.yaml",
+    "api_model": "anthropic/claude-haiku-4-5-20251001",
+    "lmarena_name": "claude-haiku-4-5-20251001",
+    "lmarena_elo": {
+      "overall": 1404,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-opus-4-5-high": {
+    "config_path": "configs/models/anthropic/claude-opus-4-5-high.yaml",
+    "api_model": "anthropic/claude-opus-4-5-20251101",
+    "lmarena_name": "claude-opus-4-5-20251101",
+    "lmarena_elo": {
+      "overall": 1467,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-opus-4-5-medium": {
+    "config_path": "configs/models/anthropic/claude-opus-4-5-medium.yaml",
+    "api_model": "anthropic/claude-opus-4-5-20251101",
+    "lmarena_name": "claude-opus-4-5-20251101",
+    "lmarena_elo": {
+      "overall": 1467,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-opus-4-6-high": {
+    "config_path": "configs/models/anthropic/claude-opus-4-6-high.yaml",
+    "api_model": "anthropic/claude-opus-4-6",
+    "lmarena_name": "claude-opus-4-6",
+    "lmarena_elo": {
+      "overall": 1503,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-opus-4-6-medium": {
+    "config_path": "configs/models/anthropic/claude-opus-4-6-medium.yaml",
+    "api_model": "anthropic/claude-opus-4-6",
+    "lmarena_name": "claude-opus-4-6",
+    "lmarena_elo": {
+      "overall": 1503,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-sonnet-4-5-high": {
+    "config_path": "configs/models/anthropic/claude-sonnet-4-5-high.yaml",
+    "api_model": "anthropic/claude-sonnet-4-5-20250929",
+    "lmarena_name": "claude-sonnet-4-5-20250929",
+    "lmarena_elo": {
+      "overall": 1448,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-sonnet-4-5-medium": {
+    "config_path": "configs/models/anthropic/claude-sonnet-4-5-medium.yaml",
+    "api_model": "anthropic/claude-sonnet-4-5-20250929",
+    "lmarena_name": "claude-sonnet-4-5-20250929",
+    "lmarena_elo": {
+      "overall": 1448,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-sonnet-4-high": {
+    "config_path": "configs/models/anthropic/claude-sonnet-4-high.yaml",
+    "api_model": "anthropic/claude-sonnet-4-20250514",
+    "lmarena_name": "claude-sonnet-4-20250514",
+    "lmarena_elo": {
+      "overall": 1396,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-sonnet-4-medium": {
+    "config_path": "configs/models/anthropic/claude-sonnet-4-medium.yaml",
+    "api_model": "anthropic/claude-sonnet-4-20250514",
+    "lmarena_name": "claude-sonnet-4-20250514",
+    "lmarena_elo": {
+      "overall": 1396,
+      "coding": null,
+      "math": null
+    }
+  },
+  "claude-sonnet-4-none": {
+    "config_path": "configs/models/anthropic/claude-sonnet-4-none.yaml",
+    "api_model": "anthropic/claude-sonnet-4-20250514",
+    "lmarena_name": "claude-sonnet-4-20250514",
+    "lmarena_elo": {
+      "overall": 1396,
+      "coding": null,
+      "math": null
+    }
+  },
+  "deepseek-chat": {
+    "config_path": "configs/models/deepseek/deepseek-chat.yaml",
+    "api_model": "deepseek/deepseek-chat",
+    "lmarena_name": "deepseek-v3-0324",
+    "lmarena_elo": {
+      "overall": 1388,
+      "coding": null,
+      "math": null
+    }
+  },
+  "deepseek-reasoner": {
+    "config_path": "configs/models/deepseek/deepseek-reasoner.yaml",
+    "api_model": "deepseek/deepseek-reasoner",
+    "lmarena_name": "deepseek-r1",
+    "lmarena_elo": {
+      "overall": 1385,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-1-5-pro": {
+    "config_path": "configs/models/google/gemini-1-5-pro.yaml",
+    "api_model": "gemini/gemini-1.5-pro",
+    "lmarena_name": "gemini-1.5-pro-002",
+    "lmarena_elo": {
+      "overall": 1340,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-2-0-flash": {
+    "config_path": "configs/models/google/gemini-2-0-flash.yaml",
+    "api_model": "gemini/gemini-2.0-flash",
+    "lmarena_name": "gemini-2.0-flash-001",
+    "lmarena_elo": {
+      "overall": 1360,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-2-5-flash": {
+    "config_path": "configs/models/google/gemini-2-5-flash.yaml",
+    "api_model": "gemini/gemini-2.5-flash",
+    "lmarena_name": "gemini-2.5-flash",
+    "lmarena_elo": {
+      "overall": 1410,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-2-5-pro-high": {
+    "config_path": "configs/models/google/gemini-2-5-pro-high.yaml",
+    "api_model": "gemini/gemini-2.5-pro",
+    "lmarena_name": "gemini-2.5-pro-preview-05-06",
+    "lmarena_elo": {
+      "overall": 1446,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-2-5-pro-medium": {
+    "config_path": "configs/models/google/gemini-2-5-pro-medium.yaml",
+    "api_model": "gemini/gemini-2.5-pro",
+    "lmarena_name": "gemini-2.5-pro-preview-05-06",
+    "lmarena_elo": {
+      "overall": 1446,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-2-5-pro-none": {
+    "config_path": "configs/models/google/gemini-2-5-pro-none.yaml",
+    "api_model": "gemini/gemini-2.5-pro",
+    "lmarena_name": "gemini-2.5-pro-preview-05-06",
+    "lmarena_elo": {
+      "overall": 1446,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-3-flash-high": {
+    "config_path": "configs/models/google/gemini-3-flash-high.yaml",
+    "api_model": "gemini/gemini-3-flash-preview",
+    "lmarena_name": "gemini-3-flash",
+    "lmarena_elo": {
+      "overall": 1473,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-3-flash-medium": {
+    "config_path": "configs/models/google/gemini-3-flash-medium.yaml",
+    "api_model": "gemini/gemini-3-flash-preview",
+    "lmarena_name": "gemini-3-flash",
+    "lmarena_elo": {
+      "overall": 1473,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-3-flash-none": {
+    "config_path": "configs/models/google/gemini-3-flash-none.yaml",
+    "api_model": "gemini/gemini-3-flash-preview",
+    "lmarena_name": "gemini-3-flash",
+    "lmarena_elo": {
+      "overall": 1473,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-3-pro-high": {
+    "config_path": "configs/models/google/gemini-3-pro-high.yaml",
+    "api_model": "gemini/gemini-3-pro-preview",
+    "lmarena_name": "gemini-3-pro",
+    "lmarena_elo": {
+      "overall": 1486,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gemini-3-pro-low": {
+    "config_path": "configs/models/google/gemini-3-pro-low.yaml",
+    "api_model": "gemini/gemini-3-pro-preview",
+    "lmarena_name": "gemini-3-pro",
+    "lmarena_elo": {
+      "overall": 1486,
+      "coding": null,
+      "math": null
+    }
+  },
+  "llama-3-1-405b": {
+    "config_path": "configs/models/meta/llama-3-1-405b.yaml",
+    "api_model": "together_ai/meta-llama/Llama-3.1-405B-Instruct-Turbo",
+    "lmarena_name": "llama-3.1-405b-instruct-fp8",
+    "lmarena_elo": {
+      "overall": 1290,
+      "coding": null,
+      "math": null
+    }
+  },
+  "llama-3-3-70b": {
+    "config_path": "configs/models/meta/llama-3-3-70b.yaml",
+    "api_model": "together_ai/meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    "lmarena_name": "llama-3.3-70b-instruct",
+    "lmarena_elo": {
+      "overall": 1285,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4-turbo": {
+    "config_path": "configs/models/openai/gpt-4-turbo.yaml",
+    "api_model": "openai/gpt-4-turbo",
+    "lmarena_name": "gpt-4-turbo-2024-04-09",
+    "lmarena_elo": {
+      "overall": 1280,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4.1-mini": {
+    "config_path": "configs/models/openai/gpt-4.1-mini.yaml",
+    "api_model": "openai/gpt-4.1-mini",
+    "lmarena_name": "gpt-4.1-mini-2025-04-14",
+    "lmarena_elo": {
+      "overall": 1380,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4.1-nano": {
+    "config_path": "configs/models/openai/gpt-4.1-nano.yaml",
+    "api_model": "openai/gpt-4.1-nano",
+    "lmarena_name": "gpt-4.1-nano-2025-04-14",
+    "lmarena_elo": {
+      "overall": 1335,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4.1": {
+    "config_path": "configs/models/openai/gpt-4.1.yaml",
+    "api_model": "openai/gpt-4.1",
+    "lmarena_name": "gpt-4.1-2025-04-14",
+    "lmarena_elo": {
+      "overall": 1413,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4o-mini": {
+    "config_path": "configs/models/openai/gpt-4o-mini.yaml",
+    "api_model": "openai/gpt-4o-mini",
+    "lmarena_name": "gpt-4o-mini-2024-07-18",
+    "lmarena_elo": {
+      "overall": 1295,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-4o": {
+    "config_path": "configs/models/openai/gpt-4o.yaml",
+    "api_model": "openai/gpt-4o",
+    "lmarena_name": "gpt-4o-2024-08-06",
+    "lmarena_elo": {
+      "overall": 1305,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-codex-high": {
+    "config_path": "configs/models/openai/gpt-5-codex-high.yaml",
+    "api_model": "openai/gpt-5-codex",
+    "lmarena_name": "gpt-5-codex",
+    "lmarena_elo": {
+      "overall": 1400,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-codex-medium": {
+    "config_path": "configs/models/openai/gpt-5-codex-medium.yaml",
+    "api_model": "openai/gpt-5-codex",
+    "lmarena_name": "gpt-5-codex",
+    "lmarena_elo": {
+      "overall": 1400,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-codex-none": {
+    "config_path": "configs/models/openai/gpt-5-codex-none.yaml",
+    "api_model": "openai/gpt-5-codex",
+    "lmarena_name": "gpt-5-codex",
+    "lmarena_elo": {
+      "overall": 1400,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-high": {
+    "config_path": "configs/models/openai/gpt-5-high.yaml",
+    "api_model": "openai/gpt-5",
+    "lmarena_name": "gpt-5",
+    "lmarena_elo": {
+      "overall": 1426,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-medium": {
+    "config_path": "configs/models/openai/gpt-5-medium.yaml",
+    "api_model": "openai/gpt-5",
+    "lmarena_name": "gpt-5",
+    "lmarena_elo": {
+      "overall": 1426,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-mini": {
+    "config_path": "configs/models/openai/gpt-5-mini.yaml",
+    "api_model": "openai/gpt-5-mini",
+    "lmarena_name": "gpt-5-mini",
+    "lmarena_elo": {
+      "overall": 1372,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-nano": {
+    "config_path": "configs/models/openai/gpt-5-nano.yaml",
+    "api_model": "openai/gpt-5-nano",
+    "lmarena_name": "gpt-5-nano",
+    "lmarena_elo": {
+      "overall": 1375,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-none": {
+    "config_path": "configs/models/openai/gpt-5-none.yaml",
+    "api_model": "openai/gpt-5",
+    "lmarena_name": "gpt-5",
+    "lmarena_elo": {
+      "overall": 1426,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5-pro": {
+    "config_path": "configs/models/openai/gpt-5-pro.yaml",
+    "api_model": "openai/gpt-5-pro",
+    "lmarena_name": "gpt-5-pro",
+    "lmarena_elo": {
+      "overall": 1370,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.1-high": {
+    "config_path": "configs/models/openai/gpt-5.1-high.yaml",
+    "api_model": "openai/gpt-5.1",
+    "lmarena_name": "gpt-5.1",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.1-medium": {
+    "config_path": "configs/models/openai/gpt-5.1-medium.yaml",
+    "api_model": "openai/gpt-5.1",
+    "lmarena_name": "gpt-5.1",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.1-none": {
+    "config_path": "configs/models/openai/gpt-5.1-none.yaml",
+    "api_model": "openai/gpt-5.1",
+    "lmarena_name": "gpt-5.1",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.2-high": {
+    "config_path": "configs/models/openai/gpt-5.2-high.yaml",
+    "api_model": "openai/gpt-5.2",
+    "lmarena_name": "gpt-5.2",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.2-medium": {
+    "config_path": "configs/models/openai/gpt-5.2-medium.yaml",
+    "api_model": "openai/gpt-5.2",
+    "lmarena_name": "gpt-5.2",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.2-none": {
+    "config_path": "configs/models/openai/gpt-5.2-none.yaml",
+    "api_model": "openai/gpt-5.2",
+    "lmarena_name": "gpt-5.2",
+    "lmarena_elo": {
+      "overall": 1437,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.2-pro": {
+    "config_path": "configs/models/openai/gpt-5.2-pro.yaml",
+    "api_model": "openai/gpt-5.2-pro",
+    "lmarena_name": "gpt-5.2-pro",
+    "lmarena_elo": {
+      "overall": 1440,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.3-high": {
+    "config_path": "configs/models/openai/gpt-5.3-high.yaml",
+    "api_model": "openai/gpt-5.3",
+    "lmarena_name": "gpt-5.3",
+    "lmarena_elo": {
+      "overall": 1393,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.3-medium": {
+    "config_path": "configs/models/openai/gpt-5.3-medium.yaml",
+    "api_model": "openai/gpt-5.3",
+    "lmarena_name": "gpt-5.3",
+    "lmarena_elo": {
+      "overall": 1393,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt-5.3-none": {
+    "config_path": "configs/models/openai/gpt-5.3-none.yaml",
+    "api_model": "openai/gpt-5.3",
+    "lmarena_name": "gpt-5.3",
+    "lmarena_elo": {
+      "overall": 1393,
+      "coding": null,
+      "math": null
+    }
+  },
+  "gpt4o": {
+    "config_path": "configs/models/openai/gpt4o.yaml",
+    "api_model": "openai/gpt-4o",
+    "lmarena_name": "gpt-4o-2024-08-06",
+    "lmarena_elo": {
+      "overall": 1305,
+      "coding": null,
+      "math": null
+    }
+  },
+  "o1": {
+    "config_path": "configs/models/openai/o1.yaml",
+    "api_model": "openai/o1",
+    "lmarena_name": "o1-2024-12-17",
+    "lmarena_elo": {
+      "overall": 1402,
+      "coding": null,
+      "math": null
+    }
+  },
+  "o3-mini": {
+    "config_path": "configs/models/openai/o3-mini.yaml",
+    "api_model": "openai/o3-mini",
+    "lmarena_name": "o3-mini",
+    "lmarena_elo": {
+      "overall": 1355,
+      "coding": null,
+      "math": null
+    }
+  },
+  "o3": {
+    "config_path": "configs/models/openai/o3.yaml",
+    "api_model": "openai/o3",
+    "lmarena_name": "o3-2025-04-16",
+    "lmarena_elo": {
+      "overall": 1433,
+      "coding": null,
+      "math": null
+    }
+  },
+  "o4-mini": {
+    "config_path": "configs/models/openai/o4-mini.yaml",
+    "api_model": "openai/o4-mini",
+    "lmarena_name": "o4-mini-2025-04-16",
+    "lmarena_elo": {
+      "overall": 1368,
+      "coding": null,
+      "math": null
+    }
+  },
+  "openai-mini": {
+    "config_path": "configs/models/openai/openai-mini.yaml",
+    "api_model": "openai/gpt-4o-mini",
+    "lmarena_name": "gpt-4o-mini-2024-07-18",
+    "lmarena_elo": {
+      "overall": 1295,
+      "coding": null,
+      "math": null
+    }
+  },
+  "grok-2-mini": {
+    "config_path": "configs/models/xai/grok-2-mini.yaml",
+    "api_model": "xai/grok-2-mini",
+    "lmarena_name": "grok-2-mini-2024-08-13",
+    "lmarena_elo": {
+      "overall": 1310,
+      "coding": null,
+      "math": null
+    }
+  },
+  "grok-2": {
+    "config_path": "configs/models/xai/grok-2.yaml",
+    "api_model": "xai/grok-2",
+    "lmarena_name": "grok-2-2024-08-13",
+    "lmarena_elo": {
+      "overall": 1330,
+      "coding": null,
+      "math": null
+    }
+  },
+  "grok-3": {
+    "config_path": "configs/models/xai/grok-3.yaml",
+    "api_model": "xai/grok-3",
+    "lmarena_name": "grok-3-preview-02-24",
+    "lmarena_elo": {
+      "overall": 1411,
+      "coding": null,
+      "math": null
+    }
+  },
+  "grok-4-1": {
+    "config_path": "configs/models/xai/grok-4-1.yaml",
+    "api_model": "xai/grok-4.1",
+    "lmarena_name": "grok-4.1",
+    "lmarena_elo": {
+      "overall": 1463,
+      "coding": null,
+      "math": null
+    }
+  }
+}

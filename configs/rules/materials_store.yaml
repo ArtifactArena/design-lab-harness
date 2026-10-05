@@ -1,0 +1,72 @@
+# =============================================================================
+# Material Palette for Battle Bots
+# =============================================================================
+#
+# Each material defines physics (density, friction) and visual (rgba, specular,
+# shininess) properties. LLMs pick a material per geom (e.g., material="steel"),
+# and mass/friction are computed automatically from volume x density.
+#
+# Visual properties are injected as MuJoCo <material> assets so material="steel"
+# is both a physics lookup AND a valid visual reference.
+
+# Default material auto-assigned to geoms missing material= attribute.
+# Must be a key in the materials dict below.
+default_material: foam
+
+materials:
+  foam:
+    density_kg_m3: 200
+    friction: 0.5
+    desc: "Structural foam"
+    rgba: "0.92 0.90 0.85 1"
+    specular: 0.0
+    shininess: 0.0
+  plastic:
+    density_kg_m3: 950
+    friction: 0.25
+    desc: "HDPE plastic"
+    rgba: "0.95 0.95 0.95 1"
+    specular: 0.1
+    shininess: 0.1
+  rubber:
+    density_kg_m3: 1200
+    friction: 1.6
+    desc: "High-grip rubber"
+    rgba: "0.12 0.12 0.12 1"
+    specular: 0.0
+    shininess: 0.0
+  carbon_fiber:
+    density_kg_m3: 1700
+    friction: 0.35
+    desc: "Carbon fiber composite"
+    rgba: "0.10 0.10 0.12 1"
+    specular: 0.3
+    shininess: 0.2
+  aluminum:
+    density_kg_m3: 2700
+    friction: 0.45
+    desc: "Aluminum alloy"
+    rgba: "0.75 0.75 0.78 1"
+    specular: 0.5
+    shininess: 0.3
+  titanium:
+    density_kg_m3: 4500
+    friction: 0.4
+    desc: "Titanium alloy"
+    rgba: "0.60 0.58 0.55 1"
+    specular: 0.4
+    shininess: 0.25
+  steel:
+    density_kg_m3: 7800
+    friction: 0.6
+    desc: "Mild steel"
+    rgba: "0.55 0.55 0.60 1"
+    specular: 0.6
+    shininess: 0.5
+  tungsten:
+    density_kg_m3: 19300
+    friction: 0.4
+    desc: "Tungsten alloy"
+    rgba: "0.35 0.35 0.38 1"
+    specular: 0.4
+    shininess: 0.3

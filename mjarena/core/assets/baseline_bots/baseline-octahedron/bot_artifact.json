@@ -1,0 +1,33 @@
+{
+  "name": "Air Octahedron",
+  "generator": "octahedron",
+  "morphology_xml": "robot.xml",
+  "controller_code": "controller.py",
+  "actuator_names": [],
+  "morphology_outputs": {
+    "design_calculations": "Stationary octahedron baseline embodying air element. No actuators. 8-faced geometric form.",
+    "overview": "A light octahedron symbolizing air with 8 triangular faces. Serves as a platonic solid baseline with elemental inspiration.",
+    "movement": "None — no actuators.",
+    "attack": "None — passive obstacle.",
+    "defense": "Balanced octahedral geometry provides symmetrical resistance from all angles through 8 face contact points."
+  },
+  "actuator_outputs": {
+    "strategy_plan": "Do nothing. Exist as a platonic solid baseline.",
+    "movement_logic": "",
+    "attack_logic": "",
+    "defense_logic": ""
+  },
+  "morphology_score": 1.0,
+  "controller_score": 0.0,
+  "controller_verified": true,
+  "controller_errors": [],
+  "forfeit": false,
+  "forfeit_stage": "",
+  "forfeit_error": "",
+  "metadata": {
+    "baseline": true,
+    "description": "Stationary air octahedron — platonic solid baseline",
+    "element": "Air",
+    "faces": 8
+  }
+}

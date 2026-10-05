@@ -1,0 +1,71 @@
+{
+  "model": "claude-fable-5-1",
+  "reasoning_effort": "high",
+  "service_tier": "default",
+  "max_output_tokens": 128000,
+  "revision_attempts": 10,
+  "qualification_seeds": [
+    0,
+    1,
+    2
+  ],
+  "qualification_seconds": 20,
+  "feedback_hz": 2,
+  "starting_bot": null,
+  "source_artifact": null,
+  "harness_commit": "62b916b589be2034a1500fb41c2569a623925ac8",
+  "input_context": "latest previous robot/controller and its feedback only; no accumulated conversation",
+  "omitted_observation_fields": [
+    "arena_grid",
+    "arena_mass_grid",
+    "edge_distance_grid",
+    "obs_history",
+    "action_history",
+    "my_robot",
+    "opponent_robot"
+  ],
+  "combat_scores_in_prompt_feedback": false,
+  "template_sha256": "d81c6f2ffa01dd49f34dfe5767eee666ddb90940c420a88dd647ca8cc576ef48",
+  "sampling_prompt_sha256": "210e714199d8098353452e5a8e415565914226bac52eddfa9f5d8021b89e0276",
+  "initial_design": "from scratch; revision 1 creates the initial design; 10 total submissions",
+  "experiment_title": "Claude Fable 5.1 \u00b7 High \u00b7 repeat 1 \u00b7 tool use",
+  "execution_host": "host-a.example.org",
+  "execution_platform": "Linux x86_64",
+  "python_environment": "<envs-root>/iterative-mj310-20260923",
+  "provider": "anthropic",
+  "pricing": {
+    "input": 10,
+    "cache_read": 0.25,
+    "output": 50
+  },
+  "template_commit": "7059e87d257b6c97b41b0198275bb7cf3723ef19",
+  "prompt_only_rounding": {
+    "fields": [
+      "contacts",
+      "opponent_proximity"
+    ],
+    "significant_digits": 6
+  },
+  "replay_selection": "one loss, else draw, else slowest win; lowest seed ties",
+  "tournament_feedback": false,
+  "reward_feedback": false,
+  "roster_model": "claude-fable-5-1-high",
+  "qualification_parallel_seeds": 3,
+  "run_id": "design-lab-23x2-20260924-oe_r1_fable51",
+  "provider_options": {},
+  "sampling_params": {
+    "temperature": 1.0
+  },
+  "pricing_verified_at": "2026-09-24",
+  "pricing_source": "https://platform.claude.com/docs/en/about-claude/pricing",
+  "long_context_threshold": null,
+  "repeat": 1,
+  "batch": "design-lab-23x2-20260924",
+  "champion_matches_enabled": false,
+  "selection_matches": 270,
+  "model_turns": 10,
+  "stop_on_truncation": true,
+  "commit": "86ccd5c9efc74b4c9e3645a1dc6d963c73fb3143",
+  "local_prompt_patch_sha256": "22b79478c7c39b1338bb9e2d888118c1946f8a2012540553286f9f203ae216df",
+  "monitoring_instrumentation": "Record pre-action opponent_surface_distance per control step; excludes prompt/downsampled feedback; no physics/controller changes."
+}

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="unimal_sumo_env">
+  <compiler angle="radian"/>
+  <option gravity="0 0 -9.81"/>
+  <!-- Materials and textures -->
+  <asset>
+    <!-- outside floor grid -->
+    <texture name="env_grid_tex" type="2d" builtin="checker" rgb1="0.45 0.45 0.45" rgb2="0.65 0.65 0.65" width="1024" height="1024" mark="edge" markrgb="0.25 0.25 0.25"/>
+    <material name="env_grid" texture="env_grid_tex" texrepeat="2 2" texuniform="true" reflectance="0.1"/>
+    <!-- ring (dohyo) material - pastel yellow -->
+    <material name="ring_mat" rgba="0.98 0.93 0.64 1.0" reflectance="0.0"/>
+    <!-- optional subtle border top tint - pastel, slightly darker -->
+    <material name="ring_border_mat" rgba="0.92 0.87 0.58 1.0" reflectance="0.04"/>
+  </asset>
+  <!-- Lighting / visuals -->
+  <visual>
+    <headlight ambient="0.05 0.05 0.05" diffuse="0.20 0.20 0.20" specular="0.0 0.0 0.0"/>
+    <quality shadowsize="0"/>
+  </visual>
+  <worldbody>
+    <!-- Gentle directional light (shadows) -->
+    <!-- Four directional lights from the sides looking at the center of the ring -->
+    <light diffuse="0.5 0.5 0.5" specular="0.0 0.0 0.0" directional="true" pos="8 0 4" dir="-1 0 -0.5"/>
+    <light diffuse="0.5 0.5 0.5" specular="0.0 0.0 0.0" directional="true" pos="-8 0 4" dir="1 0 -0.5"/>
+    <light diffuse="0.5 0.5 0.5" specular="0.0 0.0 0.0" directional="true" pos="0 8 4" dir="0 -1 -0.5"/>
+    <light diffuse="0.5 0.5 0.5" specular="0.0 0.0 0.0" directional="true" pos="0 -8 4" dir="0 1 -0.5"/>
+    
+    <!-- Parameters for ring geometry -->
+    <body name="arena" pos="0 0 0">
+      <!-- Surrounding infinite plane: low friction to penalize stepping off ring -->
+      <geom name="outside_floor" type="plane" pos="0 0 0" size="50 50 1" material="env_grid" friction="0.005 0.0001 0.0001" solref="0.01 1.5" solimp="0.9 0.95 0.01"/>
+      <!-- Sumo ring platform: a flat cylinder (disc) -->
+      <geom name="sumo_ring" type="cylinder" size="3.0 0.6" pos="0 0 0.6" material="ring_mat" friction="1.00 0.005 0.0001" condim="3" priority="1" solref="0.005 1" solimp="0.95 0.99 0.005" margin="0.002"/>
+      <!-- Spawn sites (for placement) roughly at 60% of radius -->
+      <site name="spawn/red" pos="-0.5 0 1.27" size="0.001" rgba="0 0 0 0" type="sphere"/>
+      <site name="spawn/blue" pos=" 0.5 0 1.27" size="0.001" rgba="0 0 0 0" type="sphere"/>
+      <!-- Starting marks (shikirisen) as non-colliding visual sites -->
+      <site name="mark/red_line" type="box" pos="-0.5 0 1.201" size="0.30 0.010 0.001" rgba="0.5 0.1 0.1 0.7"/>
+      <site name="mark/blue_line" type="box" pos=" 0.5 0 1.201" size="0.30 0.010 0.001" rgba="0.1 0.1 0.5 0.7"/>
+      <!-- Top-down camera for evaluation -->
+      <camera name="topdown" pos="0 0 9" quat="1 0 0 0" mode="trackcom"/>
+      <!-- <camera name="side" pos="0 0 9" quat="0 0 0 1" mode="trackcom"/> -->
+      <!-- <camera name="side" pos="2.620 -4.451 4.189" xyaxes="0.862 0.507 0.000 -0.319 0.543 0.777"/> -->
+      <camera name="side" pos="1.223 -7.656 4.463" xyaxes="0.987 0.158 0.000 -0.079 0.493 0.867"/>
+
+    </body>
+  </worldbody>
+</mujoco>
